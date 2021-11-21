@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-const mode = 'directions';
+const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+const mode = 'directions'
 
 export type MapProps = {
-  cords: string;
-};
+  cords: string
+}
 
-const dest = '64.138288, -21.959309';
+const dest = '64.138288, -21.959309'
 
 const Map = ({ cords = '' }: MapProps) => {
-  const mapUrl = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&origin=${cords}&destination=${dest}&mode=walking`;
+  const mapUrl = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&origin=${cords}&destination=${dest}&mode=walking`
 
   return (
     <iframe
@@ -19,7 +19,7 @@ const Map = ({ cords = '' }: MapProps) => {
       src={mapUrl}
       allowFullScreen
     ></iframe>
-  );
-};
+  )
+}
 
-export default Map;
+export default Map

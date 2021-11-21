@@ -1,25 +1,17 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import { MapContainerProps } from 'react-leaflet'
 
-const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-const mode = 'directions'
-
-export type MapProps = {
-  cords: string
-}
-
-const dest = '64.138288, -21.959309'
-
-const Map = ({ cords = '' }: MapProps) => {
-  const mapUrl = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&origin=${cords}&destination=${dest}&mode=walking`
-
-  return (
-    <iframe
-      className='h-screen w-full'
-      style={{ border: 0 }}
-      src={mapUrl}
-      allowFullScreen
-    ></iframe>
+const Map = (mapProps: MapContainerProps) => {
+  const LeafletMap = useMemo(
+    () =>
+      dynamic(() => import('./LeafletMap'), {
+        ssr: false,
+        loading: () => <p>Loading map...</p>,
+      }),
+    []
   )
+  return <LeafletMap {...mapProps} />
 }
 
 export default Map

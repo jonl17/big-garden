@@ -9,22 +9,15 @@ import 'leaflet/dist/leaflet.css'
 import { places, starts } from './places'
 import { Icon } from 'leaflet'
 import UserAgent from './components/UserAgent'
-import { useLocationContext } from '@/context/locationContext'
 
 const LeafletMap = (props: MapContainerProps) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  const startingPositon = {
-    lat: 64.140724,
-    lng: -21.948222,
-  }
-
   return (
     <MapContainer
       className='h-screen w-full z-0'
-      center={startingPositon}
-      zoom={12}
+      zoom={16}
       {...props}
     >
       <TileLayer

@@ -4,20 +4,15 @@ import {
   MapContainerProps,
   Marker,
   Tooltip,
-  Polyline,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { places, starts } from './places'
-import { Icon, LatLngExpression } from 'leaflet'
+import { Icon } from 'leaflet'
+import UserAgent from './components/UserAgent'
 
 const LeafletMap = (props: MapContainerProps) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
-
-  const { position: firstStart } = starts[0]
-  const lines: LatLngExpression[] = props.center
-    ? [{ ...props.center }, firstStart]
-    : []
 
   return (
     <MapContainer
@@ -28,15 +23,6 @@ const LeafletMap = (props: MapContainerProps) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      {props.center && (
-        <Marker
-          position={props.center}
-          title='Ég'
-          icon={icon('/person.png')}
-        >
-          <Tooltip>Ég</Tooltip>
-        </Marker>
-      )}
       {/* places positions */}
       {places.map((place, key) => (
         <Marker
@@ -57,7 +43,7 @@ const LeafletMap = (props: MapContainerProps) => {
           <Tooltip>{start.title}</Tooltip>
         </Marker>
       ))}
-      <Polyline positions={lines} />
+      <UserAgent />
     </MapContainer>
   )
 }

@@ -9,7 +9,7 @@ const Map = (mapProps: MapContainerProps) => {
         ssr: false,
         loading: () => <p>Loading map...</p>,
       }),
-    []
+    [mapProps]
   )
   return <LeafletMap {...mapProps} />
 }

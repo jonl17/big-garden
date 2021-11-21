@@ -8,11 +8,17 @@ import {
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { places, starts } from './places'
-import { Icon } from 'leaflet'
+import { Icon, LatLngExpression } from 'leaflet'
 
 const LeafletMap = (props: MapContainerProps) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
+
+  const { position: firstStart } = starts[0]
+  const lines: LatLngExpression[] = props.center
+    ? [{ ...props.center }, firstStart]
+    : []
+
   return (
     <MapContainer
       className='h-screen w-full z-0'
@@ -51,13 +57,7 @@ const LeafletMap = (props: MapContainerProps) => {
           <Tooltip>{start.title}</Tooltip>
         </Marker>
       ))}
-      {props.center
-        ? starts.map((s) => (
-            <Polyline
-              positions={[props.center, s.position]}
-            />
-          ))
-        : null}
+      <Polyline positions={lines} />
     </MapContainer>
   )
 }

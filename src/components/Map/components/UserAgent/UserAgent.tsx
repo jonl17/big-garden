@@ -1,24 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Marker,
   Tooltip,
   Polyline,
   useMap,
+  useMapEvents,
 } from 'react-leaflet'
-import { Icon } from 'leaflet'
+import { Icon, LatLng } from 'leaflet'
 import { useGetLocation } from '@/hooks/useGetLocation'
 import { starts } from '@/components/Map/places'
 
 const UserAgent = () => {
-  const { position } = useGetLocation()
+  // const { position } = useGetLocation()
 
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  const map = useMap()
+  const { position } = useGetLocation()
 
   if (position) {
-    map.setView(position, 16)
     return (
       <>
         <Marker

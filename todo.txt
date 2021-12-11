@@ -1,0 +1,29 @@
+- menu
+  - login / create user
+    - snappy auto generated user name
+    - store with aws / firebase / something
+    - user stores progress
+  - or start anonymous
+    - no progress stored
+
+- map events
+  - find all locations
+  - defined area
+
+- cms
+  - map event
+    - lat / long
+    - popup content
+      - video?
+      - image?
+      - text?
+    - work unlocked
+    - (has generic site of interest icon)
+  - work
+    - video
+    - images
+    - description
+    - unique icon for work
+    - lat / long
+    - title
+  

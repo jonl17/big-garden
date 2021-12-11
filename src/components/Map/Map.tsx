@@ -1,25 +1,21 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import { MapEventType } from '@/prismic/utils/resolvers'
 
-const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-const mode = 'directions'
-
-export type MapProps = {
-  cords: string
+type Props = {
+  mapEvents: MapEventType[]
 }
 
-const dest = '64.138288, -21.959309'
-
-const Map = ({ cords = '' }: MapProps) => {
-  const mapUrl = `https://www.google.com/maps/embed/v1/${mode}?key=${key}&origin=${cords}&destination=${dest}&mode=walking`
-
-  return (
-    <iframe
-      className='h-screen w-full'
-      style={{ border: 0 }}
-      src={mapUrl}
-      allowFullScreen
-    ></iframe>
+const Map = ({ mapEvents }: Props) => {
+  const LeafletMap = useMemo(
+    () =>
+      dynamic(() => import('./components/LeafletMap'), {
+        ssr: false,
+        loading: () => <p>Loading map...</p>,
+      }),
+    [mapEvents]
   )
+  return <LeafletMap mapEvents={mapEvents} />
 }
 
 export default Map

@@ -1,40 +1,33 @@
 import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
-import Map from '../components/Map'
+import Map from '@/components/Map'
+import { mapEvents } from '@/prismic/utils/helpers'
+import {
+  mapEventResolver,
+  MapEventType,
+} from '@/prismic/utils/resolvers'
 
-const Header: React.FC = ({ children }) => {
-  return <h1 className='absolute top-5 right-5'>{children}</h1>
+type Props = {
+  events: MapEventType[]
 }
 
-const Home: NextPage = () => {
-  const [userCords, setUserCords] = useState('')
-
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      const updateCords = (position: GeolocationPosition) => {
-        setUserCords(
-          `${position.coords.latitude}, ${position.coords.longitude}`
-        )
-      }
-
-      console.log('geolocation is available')
-
-      navigator.geolocation.getCurrentPosition((position) => {
-        updateCords(position)
-        setInterval(() => {
-          updateCords(position)
-        }, 2000)
-      })
-    } else {
-      console.log('geolocation is NOT available')
-    }
-  }, [])
+const Home: NextPage<Props> = ({ events }) => {
   return (
     <div className='relative'>
-      {userCords ? <Header>{userCords}</Header> : 'User cords not set'}
-      {userCords && <Map cords={userCords} />}
+      <Map mapEvents={events} />
     </div>
   )
 }
 
 export default Home
+
+export const getServerSideProps = async () => {
+  const rawEvents = await mapEvents()
+  const resolvedEvents = rawEvents.results.map((doc: any) =>
+    mapEventResolver(doc)
+  )
+  return {
+    props: {
+      events: resolvedEvents,
+    },
+  }
+}

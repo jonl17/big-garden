@@ -1,17 +1,21 @@
 import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import { MapContainerProps } from 'react-leaflet'
+import { MapEventType } from '@/prismic/utils/resolvers'
 
-const Map = (mapProps: MapContainerProps) => {
+type Props = {
+  mapEvents: MapEventType[]
+}
+
+const Map = ({ mapEvents }: Props) => {
   const LeafletMap = useMemo(
     () =>
-      dynamic(() => import('./LeafletMap'), {
+      dynamic(() => import('./components/LeafletMap'), {
         ssr: false,
         loading: () => <p>Loading map...</p>,
       }),
-    [mapProps]
+    [mapEvents]
   )
-  return <LeafletMap {...mapProps} />
+  return <LeafletMap mapEvents={mapEvents} />
 }
 
 export default Map

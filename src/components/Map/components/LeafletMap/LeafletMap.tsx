@@ -6,35 +6,39 @@ import {
   Tooltip,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { places, starts } from './places'
+import { places, starts } from '../../places'
 import { Icon } from 'leaflet'
-import UserAgent from './components/UserAgent'
+import UserAgent from '../UserAgent'
+import { MapEventType } from '@/prismic/utils/resolvers'
 
-const LeafletMap = (props: MapContainerProps) => {
+type Props = {
+  mapEvents: MapEventType[]
+}
+
+const LeafletMap = ({ mapEvents }: Props) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
+  console.log(mapEvents)
+
   return (
-    <MapContainer
-      className='h-screen w-full z-0'
-      zoom={16}
-      {...props}
-    >
+    <MapContainer className='h-screen w-full z-0' zoom={16}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      {/* places positions */}
-      {places.map((place, key) => (
+      {/* events */}
+      {mapEvents.map((event, key) => (
         <Marker
           key={key}
-          position={place.position}
-          title={place.title}
-          icon={icon(place.icon)}
-        >
-          <Tooltip>{place.title}</Tooltip>
-        </Marker>
+          position={{
+            lat: event.coordinates.lat,
+            lng: event.coordinates.lng,
+          }}
+          icon={icon('/can.png')}
+        ></Marker>
       ))}
+
       {starts.map((start, key) => (
         <Marker
           key={key}

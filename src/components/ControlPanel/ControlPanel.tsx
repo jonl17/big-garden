@@ -6,7 +6,7 @@ type Props = {
 
 const ControlPanel = ({ position }: Props) => {
   return (
-    <div className='fixed top-0 right-0'>
+    <div className='fixed top-5 right-5'>
       <p>lat: {position.latitude}</p>
       <p>lng: {position.longitude}</p>
     </div>

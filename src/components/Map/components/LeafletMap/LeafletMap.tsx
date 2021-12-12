@@ -50,8 +50,9 @@ const LeafletMap = ({ mapEvents }: Props) => {
         ></Marker>
       ))}
 
-      {falkagataCrossroadsArea.map((pos) => (
+      {falkagataCrossroadsArea.map((pos, key) => (
         <Marker
+          key={key}
           position={{
             lat: pos.Latitude,
             lng: pos.Longitude,

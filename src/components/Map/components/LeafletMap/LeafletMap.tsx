@@ -10,6 +10,8 @@ import { places, starts } from '../../places'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
 import { MapEventType } from '@/prismic/utils/resolvers'
+import { useEffect } from 'react'
+import { useGetInitialPosition } from '@/hooks/useGetInitialLocation'
 
 type Props = {
   mapEvents: MapEventType[]
@@ -19,13 +21,17 @@ const LeafletMap = ({ mapEvents }: Props) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
+  const { position } = useGetInitialPosition()
+
+  if (!position) return <p>Loading map</p>
+
   return (
     <MapContainer
       className='h-screen w-full z-0'
       zoom={16}
       center={{
-        lat: mapEvents[0].coordinates.lat,
-        lng: mapEvents[0].coordinates.lng,
+        lat: position.latitude,
+        lng: position.longitude,
       }}
     >
       <TileLayer

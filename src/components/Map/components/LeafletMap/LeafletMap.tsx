@@ -6,12 +6,12 @@ import {
   Tooltip,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { places, starts } from '../../places'
+import { starts } from '../../places'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
 import { MapEventType } from '@/prismic/utils/resolvers'
-import { useEffect } from 'react'
 import { useGetInitialPosition } from '@/hooks/useGetInitialLocation'
+import { falkagataCrossroadsArea } from '@/components/Map/places/testAreas'
 
 type Props = {
   mapEvents: MapEventType[]
@@ -50,14 +50,14 @@ const LeafletMap = ({ mapEvents }: Props) => {
         ></Marker>
       ))}
 
-      {starts.map((start, key) => (
+      {falkagataCrossroadsArea.map((pos) => (
         <Marker
-          key={key}
-          position={start.position}
-          icon={icon('/start.png')}
-        >
-          <Tooltip>{start.title}</Tooltip>
-        </Marker>
+          position={{
+            lat: pos.Latitude,
+            lng: pos.Longitude,
+          }}
+          icon={icon('/plant.png')}
+        ></Marker>
       ))}
       <UserAgent />
     </MapContainer>

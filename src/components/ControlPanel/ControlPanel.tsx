@@ -8,18 +8,18 @@ const Data = ({
 }: {
   position: GeolocationCoordinates
 }) => {
-  const geoposition = new GeoPosition(
-    position.latitude,
-    position.longitude
-  )
-
   const [inArea, setInArea] = useState(false)
 
   useEffect(() => {
+    const geoposition = new GeoPosition(
+      position.latitude,
+      position.longitude
+    )
+
     if (geoposition.IsInsideArea(falkagataCrossroadsArea)) {
       setInArea(true)
     } else setInArea(false)
-  }, [geoposition])
+  }, [])
 
   return (
     <div className='fixed top-5 right-5'>

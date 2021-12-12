@@ -11,7 +11,7 @@ import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
 import { MapEventType } from '@/prismic/utils/resolvers'
 import { useGetInitialPosition } from '@/hooks/useGetInitialLocation'
-import { falkagataCrossroadsArea } from '@/components/Map/places/testAreas'
+import { sudurgata } from '@/components/Map/places/testAreas'
 
 type Props = {
   mapEvents: MapEventType[]
@@ -50,7 +50,7 @@ const LeafletMap = ({ mapEvents }: Props) => {
         ></Marker>
       ))}
 
-      {falkagataCrossroadsArea.map((pos, key) => (
+      {sudurgata.coords.map((pos, key) => (
         <Marker
           key={key}
           position={{

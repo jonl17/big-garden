@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { GeoPosition } from 'geo-position.ts'
-import { falkagataCrossroadsArea } from '@/components/Map/places/testAreas'
+import { sudurgata } from '@/components/Map/places/testAreas'
 import { useGetLocation } from '@/hooks/useGetLocation'
 
 const Data = ({
@@ -17,7 +17,7 @@ const Data = ({
     <div className='fixed top-5 right-5'>
       <p>lat: {position.latitude}</p>
       <p>lng: {position.longitude}</p>
-      {geoposition.IsInsideArea(falkagataCrossroadsArea) ? (
+      {geoposition.IsInsideArea(sudurgata.coords) ? (
         <p className='text-red-600'>
           Þú ERT á Fálkagötu krossgötum
         </p>

@@ -11,27 +11,33 @@ import { useGetLocation } from '@/hooks/useGetLocation'
 import { starts } from '@/components/Map/places'
 
 const UserAgent = () => {
-  // const { position } = useGetLocation()
-
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
   const { position } = useGetLocation()
+
+  console.log(position)
 
   if (position) {
     return (
       <>
         <Marker
           position={{
-            lat: position?.lat,
-            lng: position?.lng,
+            lat: position.latitude,
+            lng: position.longitude,
           }}
           icon={icon('/person.png')}
         >
           <Tooltip>You are here!</Tooltip>
         </Marker>
         <Polyline
-          positions={[position, starts[0].position]}
+          positions={[
+            {
+              lat: position.latitude,
+              lng: position.longitude,
+            },
+            starts[0].position,
+          ]}
         />
       </>
     )

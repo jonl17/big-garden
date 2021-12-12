@@ -19,10 +19,15 @@ const LeafletMap = ({ mapEvents }: Props) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  console.log(mapEvents)
-
   return (
-    <MapContainer className='h-screen w-full z-0' zoom={16}>
+    <MapContainer
+      className='h-screen w-full z-0'
+      zoom={16}
+      center={{
+        lat: mapEvents[0].coordinates.lat,
+        lng: mapEvents[0].coordinates.lng,
+      }}
+    >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

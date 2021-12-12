@@ -1,24 +1,31 @@
 import { useState, useEffect } from 'react'
-import { useMap } from 'react-leaflet'
 
 const useGetLocation = () => {
   const [position, setPosition] =
-    useState<{ lat: number; lng: number }>()
+    useState<GeolocationCoordinates>()
 
-  const map = useMap()
+  const errorHandler = (err: any) => {
+    if (err.code == 1) {
+      alert('Error: Access is denied!')
+    } else if (err.code == 2) {
+      alert('Error: Position is unavailable!')
+    }
+  }
 
   useEffect(() => {
-    map
-      .locate({ watch: true })
-      .on('locationfound', function (e) {
-        setPosition((prev) => {
-          if (!prev) {
-            map.setView(e.latlng)
-          }
-          return e.latlng
-        })
-      })
-  }, [map])
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(
+        (e) => {
+          console.log(e.coords)
+          setPosition(e.coords)
+        },
+        errorHandler,
+        {
+          enableHighAccuracy: true,
+        }
+      )
+    }
+  }, [])
 
   return { position }
 }

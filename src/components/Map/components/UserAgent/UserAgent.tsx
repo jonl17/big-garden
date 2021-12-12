@@ -16,30 +16,17 @@ const UserAgent = () => {
 
   const { position } = useGetLocation()
 
-  console.log(position)
-
   if (position) {
     return (
-      <>
-        <Marker
-          position={{
-            lat: position.latitude,
-            lng: position.longitude,
-          }}
-          icon={icon('/person.png')}
-        >
-          <Tooltip>You are here!</Tooltip>
-        </Marker>
-        <Polyline
-          positions={[
-            {
-              lat: position.latitude,
-              lng: position.longitude,
-            },
-            starts[0].position,
-          ]}
-        />
-      </>
+      <Marker
+        position={{
+          lat: position.latitude,
+          lng: position.longitude,
+        }}
+        icon={icon('/person.png')}
+      >
+        <Tooltip>You are here!</Tooltip>
+      </Marker>
     )
   } else return null
 }

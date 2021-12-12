@@ -19,7 +19,7 @@ const Data = ({
     if (geoposition.IsInsideArea(falkagataCrossroadsArea)) {
       setInArea(true)
     } else setInArea(false)
-  }, [])
+  }, [geoposition])
 
   return (
     <div className='fixed top-5 right-5'>

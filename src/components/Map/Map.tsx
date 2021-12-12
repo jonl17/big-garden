@@ -13,7 +13,7 @@ const Map = ({ mapEvents }: Props) => {
         ssr: false,
         loading: () => <p>Loading map...</p>,
       }),
-    [mapEvents]
+    []
   )
   return <LeafletMap mapEvents={mapEvents} />
 }

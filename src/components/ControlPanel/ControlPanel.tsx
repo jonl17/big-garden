@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { GeoPosition } from 'geo-position.ts'
 import { falkagataCrossroadsArea } from '@/components/Map/places/testAreas'
+import { useGetLocation } from '@/hooks/useGetLocation'
 
-type Props = {
+const Data = ({
+  position,
+}: {
   position: GeolocationCoordinates
-}
-
-const ControlPanel = ({ position }: Props) => {
+}) => {
   const geoposition = new GeoPosition(
     position.latitude,
     position.longitude
@@ -18,7 +19,7 @@ const ControlPanel = ({ position }: Props) => {
     if (geoposition.IsInsideArea(falkagataCrossroadsArea)) {
       setInArea(true)
     } else setInArea(false)
-  }, [position])
+  }, [])
 
   return (
     <div className='fixed top-5 right-5'>
@@ -33,6 +34,13 @@ const ControlPanel = ({ position }: Props) => {
       )}
     </div>
   )
+}
+
+const ControlPanel = () => {
+  const { position } = useGetLocation()
+
+  if (!position) return <p>loading position</p>
+  return <Data position={position} />
 }
 
 export default ControlPanel

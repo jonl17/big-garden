@@ -16,7 +16,6 @@ const useGetLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(
         (e) => {
-          console.log(e.coords)
           setPosition(e.coords)
         },
         errorHandler,

@@ -6,19 +6,16 @@ import {
   MapEventType,
 } from '@/prismic/utils/resolvers'
 import ControlPanel from '@/components/ControlPanel'
-import { useGetLocation } from '@/hooks/useGetLocation'
 
 type Props = {
   events: MapEventType[]
 }
 
 const Home: NextPage<Props> = ({ events }) => {
-  const { position } = useGetLocation()
-
   return (
     <div className='relative'>
       <Map mapEvents={events} />
-      {position && <ControlPanel position={position} />}
+      <ControlPanel />
     </div>
   )
 }

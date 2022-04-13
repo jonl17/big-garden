@@ -15,7 +15,6 @@ const useGetInitialPosition = () => {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((e) => {
-        console.log(e.coords)
         setPosition(e.coords)
       }, errorHandler)
     }

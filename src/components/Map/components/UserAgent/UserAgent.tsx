@@ -7,21 +7,21 @@ import {
   useMapEvents,
 } from 'react-leaflet'
 import { Icon, LatLng } from 'leaflet'
-import { useGetLocation } from '@/hooks/useGetLocation'
-import { starts } from '@/components/Map/places'
+import { starts } from '@components/Map/places'
+import { usePosition } from 'src/store/position'
 
 const UserAgent = () => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  const { position } = useGetLocation()
+  const { coordinates } = usePosition()
 
-  if (position) {
+  if (coordinates) {
     return (
       <Marker
         position={{
-          lat: position.latitude,
-          lng: position.longitude,
+          lat: coordinates.latitude,
+          lng: coordinates.longitude,
         }}
         icon={icon('/person.png')}
       >

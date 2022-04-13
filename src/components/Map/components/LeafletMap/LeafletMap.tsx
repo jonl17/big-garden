@@ -9,15 +9,16 @@ import 'leaflet/dist/leaflet.css'
 import { starts } from '../../places'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
-import { MapEventType } from '@/prismic/utils/resolvers'
-import { useGetInitialPosition } from '@/hooks/useGetInitialLocation'
-import { sudurgata } from '@/components/Map/places/testAreas'
+import { useGetInitialPosition } from '@hooks/useGetInitialLocation'
+import { sudurgata } from '@components/Map/places/testAreas'
+import { ISculpture, MapEventType } from 'src/types'
+import { useModal } from 'src/store/modal'
 
 type Props = {
-  mapEvents: MapEventType[]
+  sculptures: ISculpture[]
 }
 
-const LeafletMap = ({ mapEvents }: Props) => {
+const LeafletMap = ({ sculptures }: Props) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
@@ -39,15 +40,17 @@ const LeafletMap = ({ mapEvents }: Props) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {/* events */}
-      {mapEvents.map((event, key) => (
+      {sculptures.map((item, key) => (
         <Marker
           key={key}
           position={{
-            lat: event.coordinates.lat,
-            lng: event.coordinates.lng,
+            lat: item.coordinates.lat,
+            lng: item.coordinates.lng,
           }}
-          icon={icon('/can.png')}
-        ></Marker>
+          icon={icon(item.mapIcon.url)}
+        >
+          <Tooltip>{item.title}</Tooltip>
+        </Marker>
       ))}
 
       {sudurgata.coords.map((pos, key) => (

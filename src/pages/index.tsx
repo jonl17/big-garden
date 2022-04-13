@@ -1,17 +1,26 @@
 import type { NextPage } from 'next'
 import Map from '@/components/Map'
-import { mapEvents } from '@/prismic/utils/helpers'
-import {
-  mapEventResolver,
-  MapEventType,
-} from '@/prismic/utils/resolvers'
 import ControlPanel from '@/components/ControlPanel'
+import { MapEventType } from 'src/types'
+
+const EVENTS: MapEventType[] = [
+  {
+    coordinates: {
+      lat: 64.140617,
+      lng: -21.962667,
+    },
+    image: {
+      url: '/can.png',
+      alt: 'Can',
+    },
+  },
+]
 
 type Props = {
   events: MapEventType[]
 }
 
-const Home: NextPage<Props> = ({ events }) => {
+const Home: NextPage<Props> = ({ events = EVENTS }) => {
   return (
     <div className='relative'>
       <Map mapEvents={events} />
@@ -21,15 +30,3 @@ const Home: NextPage<Props> = ({ events }) => {
 }
 
 export default Home
-
-export const getServerSideProps = async () => {
-  const rawEvents = await mapEvents()
-  const resolvedEvents = rawEvents.results.map((doc: any) =>
-    mapEventResolver(doc)
-  )
-  return {
-    props: {
-      events: resolvedEvents,
-    },
-  }
-}

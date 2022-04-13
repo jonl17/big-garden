@@ -19,7 +19,7 @@
       "@/components/*": ["src/components/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/context/*": ["src/context/*"],
-      "@/prismic/*": ["src/prismic/*"]
+      "@/cms/*": ["src/cms/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

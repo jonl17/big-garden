@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import { MapEventType } from '@/prismic/utils/resolvers'
+import { MapEventType } from 'src/types'
 
 type Props = {
   mapEvents: MapEventType[]

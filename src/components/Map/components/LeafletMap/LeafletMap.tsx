@@ -9,9 +9,9 @@ import 'leaflet/dist/leaflet.css'
 import { starts } from '../../places'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
-import { MapEventType } from '@/prismic/utils/resolvers'
 import { useGetInitialPosition } from '@/hooks/useGetInitialLocation'
 import { sudurgata } from '@/components/Map/places/testAreas'
+import { MapEventType } from 'src/types'
 
 type Props = {
   mapEvents: MapEventType[]

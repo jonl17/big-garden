@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
-import { MapEventType } from 'src/types'
+import { ISculpture, MapEventType } from 'src/types'
 
 type Props = {
-  mapEvents: MapEventType[]
+  sculptures: ISculpture[]
 }
 
-const Map = ({ mapEvents }: Props) => {
+const Map = ({ sculptures }: Props) => {
   const LeafletMap = useMemo(
     () =>
       dynamic(() => import('./components/LeafletMap'), {
@@ -15,7 +15,7 @@ const Map = ({ mapEvents }: Props) => {
       }),
     []
   )
-  return <LeafletMap mapEvents={mapEvents} />
+  return <LeafletMap sculptures={sculptures} />
 }
 
 export default Map

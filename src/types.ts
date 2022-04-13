@@ -10,3 +10,17 @@ export type MapEventType = {
   }
   image: ImageType
 }
+
+export interface ISculpture {
+  title: string
+  coordinates: {
+    lat: number
+    lng: number
+  }
+  mapIcon: ImageType
+  video?: {
+    url: string
+  }
+  threeDeeModel?: string
+  description?: string
+}

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
+import { usePosition } from 'src/store/position'
 
-const useGetLocation = () => {
-  const [position, setPosition] =
-    useState<GeolocationCoordinates>()
+const useInitLocationTracker = () => {
+  const { updateCoordinates } = usePosition()
 
   const errorHandler = (err: any) => {
     if (err.code == 1) {
@@ -16,7 +16,7 @@ const useGetLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(
         (e) => {
-          setPosition(e.coords)
+          updateCoordinates(e.coords)
         },
         errorHandler,
         {
@@ -25,8 +25,6 @@ const useGetLocation = () => {
       )
     }
   }, [])
-
-  return { position }
 }
 
-export { useGetLocation }
+export { useInitLocationTracker }

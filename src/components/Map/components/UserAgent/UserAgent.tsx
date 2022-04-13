@@ -7,8 +7,8 @@ import {
   useMapEvents,
 } from 'react-leaflet'
 import { Icon, LatLng } from 'leaflet'
-import { useGetLocation } from '@/hooks/useGetLocation'
-import { starts } from '@/components/Map/places'
+import { useGetLocation } from '@hooks/useGetLocation'
+import { starts } from '@components/Map/places'
 
 const UserAgent = () => {
   const icon = (iconUrl: string) =>

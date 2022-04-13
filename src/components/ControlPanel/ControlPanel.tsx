@@ -1,7 +1,7 @@
 import React from 'react'
 import { GeoPosition } from 'geo-position.ts'
-import { sudurgata } from '@/components/Map/places/testAreas'
-import { useGetLocation } from '@/hooks/useGetLocation'
+import { sudurgata } from '@components/Map/places/testAreas'
+import { useGetLocation } from '@hooks/useGetLocation'
 
 const Data = ({
   position,

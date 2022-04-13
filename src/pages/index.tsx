@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import Map from '@/components/Map'
-import ControlPanel from '@/components/ControlPanel'
+import Map from '@components/Map'
+import ControlPanel from '@components/ControlPanel'
 import { MapEventType } from 'src/types'
 
 const EVENTS: MapEventType[] = [

@@ -9,6 +9,7 @@ import { useModal } from 'src/store/modal'
 import { useInitLocationTracker } from '@hooks/useGetLocation'
 import { measureDistance } from 'src/utils'
 import { usePosition } from 'src/store/position'
+import { useState } from 'react'
 
 type Props = {
   sculpturesRaw: any
@@ -36,10 +37,26 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
 
   useInitLocationTracker()
 
+  const [controlPanelOpen, setControlPanelOpen] =
+    useState(true)
+
   return (
     <div className='relative'>
       <Map sculptures={sculptures} />
-      <ControlPanel sculptures={sculptures} />
+      <div className='absolute top-5 right-5'>
+        {controlPanelOpen ? (
+          <button
+            onClick={() => setControlPanelOpen(false)}
+          >
+            <ControlPanel sculptures={sculptures} />
+          </button>
+        ) : (
+          <button onClick={() => setControlPanelOpen(true)}>
+            <p>Open control panel</p>
+          </button>
+        )}
+      </div>
+
       {isOpen && <Modal />}
       <button
         className='absolute left-10 bottom-10'

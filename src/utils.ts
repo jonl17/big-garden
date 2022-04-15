@@ -1,3 +1,6 @@
+import { Coordinates } from '@types'
+import { LatLng } from 'leaflet'
+
 export const measureDistance = (
   lat1: number,
   lon1: number,
@@ -17,4 +20,29 @@ export const measureDistance = (
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   var d = R * c
   return d * 1000 // meters
+}
+
+export const geoErrorHandler = (err: any) => {
+  if (err.code == 1) {
+    alert('Error: Access is denied!')
+  } else if (err.code == 2) {
+    alert('Error: Position is unavailable!')
+  }
+}
+
+export const checkProximity = (
+  from: Coordinates,
+  to: Coordinates,
+  proximity: number = 7.5
+) => {
+  const distance = measureDistance(
+    from.lat,
+    from.lng,
+    to.lat,
+    to.lng
+  )
+  return {
+    isInProximity: distance <= proximity,
+    meters: distance,
+  }
 }

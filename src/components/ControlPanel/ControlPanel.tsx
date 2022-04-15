@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GeoPosition } from 'geo-position.ts'
 import { sudurgata } from '@components/Map/places/testAreas'
 import { usePosition } from 'src/store/position'
-import { measureDistance } from 'src/utils'
+import { checkProximity, measureDistance } from 'src/utils'
 import { ISculpture } from '@types'
+import { useTracker } from 'src/store/tracker'
 
 type DataProps = {
   coordinates: GeolocationCoordinates
@@ -22,40 +23,26 @@ const Data: React.FC<DataProps> = ({
   )
 }
 
-type Props = {
-  sculptures: ISculpture[]
-}
+const ControlPanel = () => {
+  const { coordinates: userAgentCoordinates } =
+    usePosition()
+  const { tracked } = useTracker()
 
-const ControlPanel = ({ sculptures }: Props) => {
-  const { coordinates } = usePosition()
+  if (!userAgentCoordinates) return <p>loading position</p>
 
-  if (!coordinates) return <p>loading position</p>
-
-  const distances = sculptures.map((sculpture) => ({
-    distance: measureDistance(
-      sculpture.coordinates.lat,
-      sculpture.coordinates.lng,
-      coordinates.latitude,
-      coordinates.longitude
-    ),
-    ...sculpture,
-  }))
-
-  const coordInRange = distances.find(
-    (dist) => dist.distance <= 5
-  )
+  const inProximity = tracked.find((t) => t.isInProximity)
 
   return (
-    <Data coordinates={coordinates}>
-      {coordInRange ? (
-        <p>you are in area: {coordInRange.title}</p>
+    <Data coordinates={userAgentCoordinates}>
+      {inProximity ? (
+        <p>you are in area: {inProximity.name}</p>
       ) : (
         <p>you are not in any area</p>
       )}
       <div>
         distance from:
-        {distances.map((d, key) => (
-          <p key={key}> {`${d.title}: ${d.distance}`}</p>
+        {tracked.map((d, key) => (
+          <p key={key}> {`${d.name}: ${d.distance}`}</p>
         ))}
       </div>
     </Data>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useModal } from 'src/store/modal'
-import { usePosition } from 'src/store/position'
 
 const Modal = () => {
   const { closeModal, sculpture } = useModal()

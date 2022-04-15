@@ -6,16 +6,21 @@ import { getClient } from '@lib/sanity'
 import { groq } from 'next-sanity'
 import Modal from '@components/Modal'
 import { useModal } from 'src/store/modal'
-import { useInitLocationTracker } from '@hooks/useGetLocation'
+import useWatchPosition from '@hooks/useWatchPosition'
 import { measureDistance } from 'src/utils'
 import { usePosition } from 'src/store/position'
 import { useState } from 'react'
+import Inventory from '@components/Inventory'
+import { useInventory } from 'src/store/inventory'
+import { useTracker } from 'src/store/tracker'
+import CollectButton from '@components/CollectButton'
 
 type Props = {
   sculpturesRaw: any
 }
 
 const resolveProps = (node: any): ISculpture => ({
+  id: node._id,
   title: node.title,
   coordinates: node.coordinates,
   mapIcon: {
@@ -35,7 +40,9 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
 
   const { isOpen, openModal } = useModal()
 
-  useInitLocationTracker()
+  useWatchPosition(sculptures)
+  const { inventoryOpen, toggleInventory, inventory } =
+    useInventory()
 
   const [controlPanelOpen, setControlPanelOpen] =
     useState(true)
@@ -48,7 +55,7 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
           <button
             onClick={() => setControlPanelOpen(false)}
           >
-            <ControlPanel sculptures={sculptures} />
+            <ControlPanel />
           </button>
         ) : (
           <button onClick={() => setControlPanelOpen(true)}>
@@ -57,12 +64,15 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
         )}
       </div>
 
-      {isOpen && <Modal />}
+      {inventoryOpen && <Inventory />}
+
+      <CollectButton sculptures={sculptures} />
+
       <button
         className='absolute left-10 bottom-10'
-        onClick={() => openModal(sculptures[0])}
+        onClick={() => toggleInventory(true)}
       >
-        open modal test
+        {`BAG (${inventory.length})`}
       </button>
     </div>
   )
@@ -70,6 +80,7 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
 
 const query = groq`
 *[_type == "sculpture"] {
+    _id,
     mapIcon { 
     asset->
     },
@@ -83,10 +94,7 @@ const query = groq`
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  preview,
-}) => {
+export const getStaticProps: GetStaticProps = async () => {
   const sculpturesRaw = await getClient().fetch(query)
 
   return {

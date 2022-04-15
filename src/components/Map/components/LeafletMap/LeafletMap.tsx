@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css'
 import { starts } from '../../places'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
-import { useGetInitialPosition } from '@hooks/useGetInitialLocation'
+import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { sudurgata } from '@components/Map/places/testAreas'
 import { ISculpture, MapEventType } from 'src/types'
 import { useModal } from 'src/store/modal'
@@ -22,7 +22,7 @@ const LeafletMap = ({ sculptures }: Props) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  const { position } = useGetInitialPosition()
+  const { position } = useGetCurrentPosition()
 
   if (!position) return <p>Loading map</p>
 

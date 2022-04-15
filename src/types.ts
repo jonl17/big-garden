@@ -1,3 +1,5 @@
+import { LatLng, LatLngTuple } from 'leaflet'
+
 export type ImageType = {
   alt: string
   url: string
@@ -11,12 +13,15 @@ export type MapEventType = {
   image: ImageType
 }
 
+export type Coordinates = {
+  lat: number
+  lng: number
+}
+
 export interface ISculpture {
+  id: string
   title: string
-  coordinates: {
-    lat: number
-    lng: number
-  }
+  coordinates: Coordinates
   mapIcon: ImageType
   video?: {
     url: string

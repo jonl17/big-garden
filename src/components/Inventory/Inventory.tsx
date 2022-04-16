@@ -30,8 +30,8 @@ const Inventory = ({ sculptures }: Props) => {
       <section className='grid w-full grid-cols-3'>
         <div className='h-full w-full p-5'>
           {collectedSculptures.map((item, key) => (
-            <div>
-              <p key={key}>{item.title}</p>
+            <div key={key}>
+              <p>{item.title}</p>
               <img
                 className='h-24 w-24'
                 src={item.mapIcon.url}

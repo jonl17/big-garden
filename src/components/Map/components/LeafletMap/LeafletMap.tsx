@@ -1,18 +1,14 @@
 import {
   MapContainer,
   TileLayer,
-  MapContainerProps,
   Marker,
   Tooltip,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { starts } from '../../places'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
 import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
-import { sudurgata } from '@components/Map/places/testAreas'
-import { ISculpture, MapEventType } from 'src/types'
-import { useModal } from 'src/store/modal'
+import { ISculpture } from 'src/types'
 
 type Props = {
   sculptures: ISculpture[]
@@ -53,16 +49,6 @@ const LeafletMap = ({ sculptures }: Props) => {
         </Marker>
       ))}
 
-      {sudurgata.coords.map((pos, key) => (
-        <Marker
-          key={key}
-          position={{
-            lat: pos.Latitude,
-            lng: pos.Longitude,
-          }}
-          icon={icon('/plant.png')}
-        ></Marker>
-      ))}
       <UserAgent />
     </MapContainer>
   )

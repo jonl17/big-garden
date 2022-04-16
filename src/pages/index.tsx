@@ -64,7 +64,9 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
         )}
       </div>
 
-      {inventoryOpen && <Inventory />}
+      {inventoryOpen && (
+        <Inventory sculptures={sculptures} />
+      )}
 
       <CollectButton sculptures={sculptures} />
 

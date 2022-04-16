@@ -8,6 +8,11 @@ interface InventoryState {
   findItem: (id: string) => string | undefined
 }
 
+const TEST_INVENTORY = [
+  '7469537b-e008-4c0a-a98b-b158e150b588',
+  '7f8f6e2e-bf11-498b-8a1f-761ef2522a85',
+]
+
 export const useInventory = create<InventoryState>(
   (set, get) => ({
     inventoryOpen: false,

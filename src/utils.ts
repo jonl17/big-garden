@@ -33,7 +33,7 @@ export const geoErrorHandler = (err: any) => {
 export const checkProximity = (
   from: Coordinates,
   to: Coordinates,
-  proximity: number = 7.5
+  proximity: number = 15
 ) => {
   const distance = measureDistance(
     from.lat,

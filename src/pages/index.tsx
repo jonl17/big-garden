@@ -71,7 +71,7 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
       <CollectButton sculptures={sculptures} />
 
       <button
-        className='absolute left-10 bottom-36'
+        className='absolute left-5 top-5'
         onClick={() => toggleInventory(true)}
       >
         {`BAG (${inventory.length})`}

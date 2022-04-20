@@ -30,6 +30,7 @@ const LeafletMap = ({ sculptures }: Props) => {
         lat: position.latitude,
         lng: position.longitude,
       }}
+      zoomControl={false}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

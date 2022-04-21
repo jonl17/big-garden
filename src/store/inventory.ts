@@ -23,9 +23,7 @@ export const useInventory = create<InventoryState>(
       })),
     addToInventory: (item) =>
       set((store) => ({
-        inventory: store.inventory.includes(item)
-          ? store.inventory
-          : [...store.inventory, item],
+        inventory: [...store.inventory, item],
       })),
     findItem: (id) =>
       get().inventory.find((item) => item === id),

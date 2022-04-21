@@ -2,6 +2,7 @@ import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from '@types'
 import React from 'react'
 import { useInventory } from 'src/store/inventory'
+import { useModal } from 'src/store/modal'
 import { usePosition } from 'src/store/position'
 import { useTracker } from 'src/store/tracker'
 import { checkProximity } from 'src/utils'
@@ -17,10 +18,11 @@ const CollectButton = ({ sculptures }: Props) => {
     (t) => t.isInProximity && !t.collected
   )
   const { position } = useGetCurrentPosition()
+  const { openModal } = useModal()
 
   const callback = (id: string) => {
-    addToInventory(id)
-    if (position) {
+    if (!findItem(id) && position) {
+      addToInventory(id)
       updateTracking(
         sculptures.map((sc) => {
           const id = sc.id
@@ -41,6 +43,7 @@ const CollectButton = ({ sculptures }: Props) => {
           }
         })
       )
+      openModal(id)
     }
   }
 

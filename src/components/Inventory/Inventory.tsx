@@ -15,8 +15,6 @@ const Inventory = ({ sculptures }: Props) => {
     inventory.includes(sc.id)
   )
 
-  console.log(sculptures)
-
   return (
     <div className='top-1/2 left-0 -mt-[250px] bg-white fixed'>
       <div className='h-[100px] bg-gray-300 w-full'>

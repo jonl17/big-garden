@@ -9,11 +9,12 @@ import { useModal } from 'src/store/modal'
 import useWatchPosition from '@hooks/useWatchPosition'
 import { measureDistance } from 'src/utils'
 import { usePosition } from 'src/store/position'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Inventory from '@components/Inventory'
 import { useInventory } from 'src/store/inventory'
 import { useTracker } from 'src/store/tracker'
 import CollectButton from '@components/CollectButton'
+import { useSculptures } from 'src/store/sculptures'
 
 type Props = {
   sculpturesRaw: any
@@ -38,7 +39,13 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
   const sculptures: ISculpture[] =
     sculpturesRaw.map(resolveProps)
 
-  const { isOpen, openModal } = useModal()
+  const { updateSculptures } = useSculptures()
+
+  useEffect(() => {
+    updateSculptures(sculptures)
+  }, [])
+
+  const { isOpen: isModalOpen, openModal } = useModal()
 
   useWatchPosition(sculptures)
   const { inventoryOpen, toggleInventory, inventory } =
@@ -76,6 +83,8 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
       >
         {`BAG (${inventory.length})`}
       </button>
+
+      {isModalOpen && <Modal />}
     </div>
   )
 }

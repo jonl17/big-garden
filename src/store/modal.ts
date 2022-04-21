@@ -4,8 +4,8 @@ import create from 'zustand'
 interface IModalStore {
   isOpen: boolean
   closeModal: () => void
-  openModal: (sculpture: ISculpture) => void
-  sculpture?: ISculpture
+  openModal: (id: string) => void
+  sculptureId?: string
 }
 
 export const useModal = create<IModalStore>((set) => ({
@@ -13,11 +13,11 @@ export const useModal = create<IModalStore>((set) => ({
   closeModal: () =>
     set({
       isOpen: false,
-      sculpture: undefined,
+      sculptureId: undefined,
     }),
-  openModal: (sculpture: ISculpture) =>
+  openModal: (sculptureId) =>
     set({
       isOpen: true,
-      sculpture,
+      sculptureId,
     }),
 }))

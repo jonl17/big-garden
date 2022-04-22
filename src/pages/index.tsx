@@ -1,18 +1,15 @@
 import type { NextPage, GetStaticProps } from 'next'
 import Map from '@components/Map'
 import ControlPanel from '@components/ControlPanel'
-import { ISculpture, MapEventType } from 'src/types'
+import { ISculpture } from 'src/types'
 import { getClient } from '@lib/sanity'
 import { groq } from 'next-sanity'
 import Modal from '@components/Modal'
 import { useModal } from 'src/store/modal'
 import useWatchPosition from '@hooks/useWatchPosition'
-import { measureDistance } from 'src/utils'
-import { usePosition } from 'src/store/position'
 import { useEffect, useState } from 'react'
 import Inventory from '@components/Inventory'
 import { useInventory } from 'src/store/inventory'
-import { useTracker } from 'src/store/tracker'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 
@@ -45,14 +42,14 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
     updateSculptures(sculptures)
   }, [])
 
-  const { isOpen: isModalOpen, openModal } = useModal()
+  const { isOpen: isModalOpen } = useModal()
 
   useWatchPosition(sculptures)
   const { inventoryOpen, toggleInventory, inventory } =
     useInventory()
 
   const [controlPanelOpen, setControlPanelOpen] =
-    useState(true)
+    useState(false)
 
   return (
     <div className='relative'>

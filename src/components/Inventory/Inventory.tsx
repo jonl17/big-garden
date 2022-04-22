@@ -1,8 +1,7 @@
 import { ISculpture } from '@types'
 import React from 'react'
 import { useInventory } from 'src/store/inventory'
-
-const INVENTORY_SIZE = 6
+import { useModal } from 'src/store/modal'
 
 type Props = {
   sculptures: ISculpture[]
@@ -10,6 +9,7 @@ type Props = {
 
 const Inventory = ({ sculptures }: Props) => {
   const { inventory, toggleInventory } = useInventory()
+  const { openModal } = useModal()
 
   const collectedSculptures = sculptures.filter((sc) =>
     inventory.includes(sc.id)
@@ -28,13 +28,16 @@ const Inventory = ({ sculptures }: Props) => {
       <section className='grid w-full grid-cols-3'>
         <div className='h-full w-full p-5'>
           {collectedSculptures.map((item, key) => (
-            <div key={key}>
+            <button
+              key={key}
+              onClick={() => openModal(item.id)}
+            >
               <p>{item.title}</p>
               <img
                 className='h-24 w-24'
                 src={item.mapIcon.url}
               />
-            </div>
+            </button>
           ))}
         </div>
       </section>

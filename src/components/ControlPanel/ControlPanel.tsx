@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react'
-import { GeoPosition } from 'geo-position.ts'
-import { sudurgata } from '@components/Map/places/testAreas'
+import React from 'react'
 import { usePosition } from 'src/store/position'
-import { checkProximity, measureDistance } from 'src/utils'
-import { ISculpture } from '@types'
 import { useTracker } from 'src/store/tracker'
 
 type DataProps = {
@@ -31,6 +27,8 @@ const ControlPanel = () => {
   if (!userAgentCoordinates) return <p>loading position</p>
 
   const inProximity = tracked.find((t) => t.isInProximity)
+
+  const treasureMapPosition = [64.141182, -21.963409]
 
   return (
     <Data coordinates={userAgentCoordinates}>

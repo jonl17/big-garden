@@ -1,13 +1,6 @@
-import React, { useState } from 'react'
-import {
-  Marker,
-  Tooltip,
-  Polyline,
-  useMap,
-  useMapEvents,
-} from 'react-leaflet'
-import { Icon, LatLng } from 'leaflet'
-import { starts } from '@components/Map/places'
+import React from 'react'
+import { Marker, Tooltip } from 'react-leaflet'
+import { Icon } from 'leaflet'
 import { usePosition } from 'src/store/position'
 
 const UserAgent = () => {
@@ -23,7 +16,7 @@ const UserAgent = () => {
           lat: coordinates.latitude,
           lng: coordinates.longitude,
         }}
-        icon={icon('/person.png')}
+        icon={icon('/agent.png')}
       >
         <Tooltip>You are here!</Tooltip>
       </Marker>

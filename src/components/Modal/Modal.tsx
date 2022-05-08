@@ -13,7 +13,7 @@ const Modal = () => {
   if (!sculpture) return null
 
   return (
-    <div className='fixed top-0 left-0 w-full h-full p-5 lg:p-24 bg-white'>
+    <div className='fixed top-0 left-0 w-full h-full p-5 lg:p-24 bg-white z-20'>
       <button
         onClick={() => closeModal()}
         className='border px-3'

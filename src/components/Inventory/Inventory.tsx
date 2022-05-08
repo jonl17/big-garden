@@ -16,7 +16,7 @@ const Inventory = ({ sculptures }: Props) => {
   )
 
   return (
-    <div className='top-0 lef-0 h-screen bg-white fixed w-full z-50'>
+    <div className='top-0 lef-0 h-screen bg-white fixed w-full z-10'>
       <div className='h-[100px] bg-gray-300 w-full'>
         <button
           className='h-full text-right w-full p-5'
@@ -31,7 +31,6 @@ const Inventory = ({ sculptures }: Props) => {
             key={key}
             onClick={() => {
               openModal(item.id)
-              toggleInventory(false)
             }}
           >
             <img

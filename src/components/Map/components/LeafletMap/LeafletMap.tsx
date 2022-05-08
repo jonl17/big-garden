@@ -9,6 +9,10 @@ import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
 import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from 'src/types'
+import {
+  tileLayerAttribution,
+  tileLayerEndpoint,
+} from './mapBoxConfig'
 
 type Props = {
   sculptures: ISculpture[]
@@ -33,8 +37,8 @@ const LeafletMap = ({ sculptures }: Props) => {
       zoomControl={false}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        attribution={tileLayerAttribution}
+        url={tileLayerEndpoint}
       />
       {/* events */}
       {sculptures.map((item, key) => (

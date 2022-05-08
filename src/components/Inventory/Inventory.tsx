@@ -16,7 +16,7 @@ const Inventory = ({ sculptures }: Props) => {
   )
 
   return (
-    <div className='top-1/2 left-0 -mt-[250px] bg-white fixed'>
+    <div className='top-0 lef-0 h-screen bg-white fixed w-full z-50'>
       <div className='h-[100px] bg-gray-300 w-full'>
         <button
           className='h-full text-right w-full p-5'
@@ -25,22 +25,22 @@ const Inventory = ({ sculptures }: Props) => {
           X
         </button>
       </div>
-      <section className='grid w-full grid-cols-3'>
-        <div className='h-full w-full p-5'>
-          {collectedSculptures.map((item, key) => (
-            <button
-              key={key}
-              onClick={() => openModal(item.id)}
-            >
-              <p>{item.title}</p>
-              <img
-                className='h-24 w-24'
-                src={item.mapIcon.url}
-              />
-            </button>
-          ))}
-        </div>
-      </section>
+      <div className='grid w-full grid-cols-2 place-items-center'>
+        {collectedSculptures.map((item, key) => (
+          <button
+            key={key}
+            onClick={() => {
+              openModal(item.id)
+              toggleInventory(false)
+            }}
+          >
+            <img
+              className='h-44 w-44 object-cover'
+              src={item.mapIcon.url}
+            />
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

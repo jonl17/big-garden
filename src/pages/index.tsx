@@ -12,6 +12,7 @@ import Inventory from '@components/Inventory'
 import { useInventory } from 'src/store/inventory'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
+import Head from 'next/head'
 
 type Props = {
   sculpturesRaw: any
@@ -52,37 +53,47 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
     useState(false)
 
   return (
-    <div className='relative'>
-      <Map sculptures={sculptures} />
-      <div className='absolute top-5 right-5'>
-        {controlPanelOpen ? (
-          <button
-            onClick={() => setControlPanelOpen(false)}
-          >
-            <ControlPanel />
-          </button>
-        ) : (
-          <button onClick={() => setControlPanelOpen(true)}>
-            <p>Open control panel</p>
-          </button>
+    <>
+      <Head>
+        <title>Sculpture Hunt</title>
+      </Head>
+      <div className='relative'>
+        <Map sculptures={sculptures} />
+        <div className='absolute top-5 right-5'>
+          {controlPanelOpen ? (
+            <button
+              onClick={() => setControlPanelOpen(false)}
+            >
+              <ControlPanel />
+            </button>
+          ) : (
+            <button
+              onClick={() => setControlPanelOpen(true)}
+            >
+              <p>Open control panel</p>
+            </button>
+          )}
+        </div>
+
+        {inventoryOpen && (
+          <Inventory sculptures={sculptures} />
         )}
+
+        <CollectButton sculptures={sculptures} />
+
+        <button
+          className='absolute left-0 top-0'
+          onClick={() => toggleInventory(true)}
+        >
+          <img className='h-28' src='/bag.png' />
+          <p className='absolute top-16 left-12 text-xl'>
+            {inventory.length + 1}
+          </p>
+        </button>
+
+        {isModalOpen && <Modal />}
       </div>
-
-      {inventoryOpen && (
-        <Inventory sculptures={sculptures} />
-      )}
-
-      <CollectButton sculptures={sculptures} />
-
-      <button
-        className='absolute left-5 top-5'
-        onClick={() => toggleInventory(true)}
-      >
-        {`BAG (${inventory.length})`}
-      </button>
-
-      {isModalOpen && <Modal />}
-    </div>
+    </>
   )
 }
 

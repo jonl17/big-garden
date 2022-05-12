@@ -13,6 +13,7 @@ import { useInventory } from 'src/store/inventory'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
+import ThreeDeeEngine from '@components/ThreeDeeEngine'
 
 type Props = {
   sculpturesRaw: any

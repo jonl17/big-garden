@@ -1,3 +1,4 @@
+import ThreeDeeEngine from '@components/ThreeDeeEngine'
 import React from 'react'
 import { useModal } from 'src/store/modal'
 import { useSculptures } from 'src/store/sculptures'
@@ -25,6 +26,10 @@ const Modal = () => {
           <h1 className='text-5xl text-center mb-5'>
             {sculpture.title}
           </h1>
+
+          {/* render 3d model */}
+          <ThreeDeeEngine />
+
           {sculpture.video && (
             <video
               className='w-full lg:h-full'

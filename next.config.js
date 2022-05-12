@@ -11,4 +11,7 @@ const STUDIO_REWRITE = {
 module.exports = {
   reactStrictMode: true,
   rewrites: () => [STUDIO_REWRITE],
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }

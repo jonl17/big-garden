@@ -1,11 +1,10 @@
-import React, { useLayoutEffect, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import {
   Canvas,
   extend,
   useLoader,
 } from '@react-three/fiber'
-import * as THREE from 'three'
-import { useGLTF, OrbitControls } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 extend({ OrbitControls })
@@ -50,5 +49,7 @@ const ThreeDeeEngine = () => {
     </Canvas>
   )
 }
+
+useLoader.preload(GLTFLoader, '/models/poly.glb')
 
 export default ThreeDeeEngine

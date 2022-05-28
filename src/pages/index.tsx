@@ -16,29 +16,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { resolveSculpture } from 'src/utils'
 
 type Props = {
   sculpturesRaw: any
 }
 
-const resolveProps = (node: any): ISculpture => ({
-  id: node._id,
-  title: node.title,
-  coordinates: node.coordinates,
-  mapIcon: {
-    url: node.mapIcon.asset.url,
-    alt: 'map icon',
-  },
-  video: node.video
-    ? {
-        url: node.video.asset.url,
-      }
-    : undefined,
-})
-
 const Home: NextPage<Props> = ({ sculpturesRaw }) => {
-  const sculptures: ISculpture[] =
-    sculpturesRaw.map(resolveProps)
+  const sculptures: ISculpture[] = sculpturesRaw.map(
+    resolveSculpture
+  )
 
   const { updateSculptures } = useSculptures()
 
@@ -107,7 +94,8 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
 }
 
 // preload models
-useLoader.preload(GLTFLoader, '/models/poly.glb')
+useLoader.preload(GLTFLoader, '/models/kassi.glb')
+useLoader.preload(GLTFLoader, '/models/tunna.glb')
 
 const query = groq`
 *[_type == "sculpture"] {
@@ -119,7 +107,8 @@ const query = groq`
     asset->
     },
     title,
-    coordinates
+    coordinates,
+    threeDeeModel
 }
 `
 

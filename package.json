@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-three/drei": "^8.3.1",
     "@react-three/fiber": "^7.0.24",
+    "@sanity/vision": "^2.30.0",
     "@types/three": "^0.140.0",
     "geo-position.ts": "^1.4.1",
     "leaflet": "^1.7.1",

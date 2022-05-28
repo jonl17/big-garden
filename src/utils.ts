@@ -1,4 +1,4 @@
-import { Coordinates } from '@types'
+import { Coordinates, ISculpture } from '@types'
 import { LatLng } from 'leaflet'
 
 export const measureDistance = (
@@ -46,3 +46,21 @@ export const checkProximity = (
     meters: distance,
   }
 }
+
+export const resolveSculpture = (
+  node: any
+): ISculpture => ({
+  id: node._id,
+  title: node.title,
+  coordinates: node.coordinates,
+  mapIcon: {
+    url: node.mapIcon.asset.url,
+    alt: 'map icon',
+  },
+  video: node.video
+    ? {
+        url: node.video.asset.url,
+      }
+    : undefined,
+  threeDeeModel: `/models/${node.threeDeeModel}`,
+})

@@ -32,7 +32,11 @@ const Modal = () => {
       {sculpture && (
         <div className='h-full'>
           {/* render 3d model */}
-          <ThreeDeeEngine />
+          {sculpture.threeDeeModel && (
+            <ThreeDeeEngine
+              modelPath={sculpture.threeDeeModel}
+            />
+          )}
 
           {sculpture.video && (
             <video

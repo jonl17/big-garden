@@ -21,7 +21,13 @@ const Model = ({ model }: ModelProps) => {
   return <primitive object={gltf.scene} />
 }
 
-const ThreeDeeEngine = () => {
+interface IThreeDeeEngineProps {
+  modelPath: string
+}
+
+const ThreeDeeEngine = ({
+  modelPath,
+}: IThreeDeeEngineProps) => {
   const isBrowser = typeof window !== 'undefined'
 
   if (!isBrowser) return null
@@ -33,13 +39,8 @@ const ThreeDeeEngine = () => {
       camera={{ position: [0, 1.1, 2.35], fov: 25 }}
     >
       <ambientLight intensity={0.75} />
-      <spotLight
-        position={[0, -2, 1]}
-        penumbra={1}
-        castShadow
-      />
       <Suspense fallback={null}>
-        <Model model={{ path: '/models/poly.glb' }} />
+        <Model model={{ path: modelPath }} />
         <OrbitControls
           enableZoom={false}
           autoRotateSpeed={4}

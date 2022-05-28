@@ -1,4 +1,8 @@
-import { useContext, createContext, useState } from 'react'
+import React, {
+  useContext,
+  createContext,
+  useState,
+} from 'react'
 
 type PositionType = { lat: number; lng: number }
 
@@ -7,7 +11,9 @@ const LocationContext = createContext<{
   updatePosition: (pos: PositionType) => void
 }>({ position: undefined, updatePosition() {} })
 
-const LocationProvider: React.FC = ({ children }) => {
+const LocationProvider: React.FC<{
+  children?: React.ReactNode
+}> = ({ children }) => {
   const [position, setPosition] = useState<PositionType>()
 
   const updatePosition = (pos: PositionType) =>

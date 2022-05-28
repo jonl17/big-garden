@@ -11,6 +11,7 @@ interface InventoryState {
 const TEST_INVENTORY = [
   '7469537b-e008-4c0a-a98b-b158e150b588',
   '7f8f6e2e-bf11-498b-8a1f-761ef2522a85',
+  'bca5c478-497f-4c2e-9987-560b621ce511',
 ]
 
 export const useInventory = create<InventoryState>(

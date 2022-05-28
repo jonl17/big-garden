@@ -13,30 +13,23 @@ import { useInventory } from 'src/store/inventory'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
-import ThreeDeeEngine from '@components/ThreeDeeEngine'
+import Image from 'next/image'
+import { useLoader } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { resolveSculpture } from 'src/utils'
 
 type Props = {
   sculpturesRaw: any
+  mapboxEndpoint: string
 }
 
-const resolveProps = (node: any): ISculpture => ({
-  id: node._id,
-  title: node.title,
-  coordinates: node.coordinates,
-  mapIcon: {
-    url: node.mapIcon.asset.url,
-    alt: 'map icon',
-  },
-  video: node.video
-    ? {
-        url: node.video.asset.url,
-      }
-    : undefined,
-})
-
-const Home: NextPage<Props> = ({ sculpturesRaw }) => {
-  const sculptures: ISculpture[] =
-    sculpturesRaw.map(resolveProps)
+const Home: NextPage<Props> = ({
+  sculpturesRaw,
+  mapboxEndpoint,
+}) => {
+  const sculptures: ISculpture[] = sculpturesRaw.map(
+    resolveSculpture
+  )
 
   const { updateSculptures } = useSculptures()
 
@@ -53,13 +46,18 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
   const [controlPanelOpen, setControlPanelOpen] =
     useState(false)
 
+  console.log('rendering')
+
   return (
     <>
       <Head>
         <title>Sculpture Hunt</title>
       </Head>
       <div className='relative'>
-        <Map sculptures={sculptures} />
+        <Map
+          sculptures={sculptures}
+          mapboxEndpoint={mapboxEndpoint}
+        />
         <div className='absolute top-5 right-5'>
           {controlPanelOpen ? (
             <button
@@ -83,13 +81,19 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
         <CollectButton sculptures={sculptures} />
 
         <button
-          className='absolute left-0 top-0'
+          className='absolute left-0 top-0 h-28 w-28'
           onClick={() => toggleInventory(true)}
         >
-          <img className='h-28' src='/bag.png' />
-          <p className='absolute top-16 left-12 text-xl'>
-            {inventory.length + 1}
-          </p>
+          <div className='relative h-full w-full'>
+            <Image
+              alt='Bag icon'
+              layout='fill'
+              src='/bag-yellow.png'
+            />
+            <p className='absolute top-16 left-12 text-xl'>
+              {inventory.length}
+            </p>
+          </div>
         </button>
 
         {isModalOpen && <Modal />}
@@ -97,6 +101,10 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
     </>
   )
 }
+
+// preload models
+useLoader.preload(GLTFLoader, '/models/kassi.glb')
+useLoader.preload(GLTFLoader, '/models/tunna.glb')
 
 const query = groq`
 *[_type == "sculpture"] {
@@ -108,7 +116,8 @@ const query = groq`
     asset->
     },
     title,
-    coordinates
+    coordinates,
+    threeDeeModel
 }
 `
 
@@ -117,9 +126,14 @@ export default Home
 export const getStaticProps: GetStaticProps = async () => {
   const sculpturesRaw = await getClient().fetch(query)
 
+  const mapboxAccessToken =
+    process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+  const mapboxEndpoint = `https://api.mapbox.com/styles/v1/jonfiskur666/cl2xja6kd00ab15mur7qxc94o/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`
+
   return {
     props: {
       sculpturesRaw,
+      mapboxEndpoint,
     },
   }
 }

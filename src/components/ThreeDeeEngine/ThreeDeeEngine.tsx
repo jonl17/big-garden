@@ -21,7 +21,13 @@ const Model = ({ model }: ModelProps) => {
   return <primitive object={gltf.scene} />
 }
 
-const ThreeDeeEngine = () => {
+interface IThreeDeeEngineProps {
+  modelPath: string
+}
+
+const ThreeDeeEngine = ({
+  modelPath,
+}: IThreeDeeEngineProps) => {
   const isBrowser = typeof window !== 'undefined'
 
   if (!isBrowser) return null
@@ -30,16 +36,11 @@ const ThreeDeeEngine = () => {
     <Canvas
       className='three-js-canvas'
       frameloop='demand'
-      camera={{ position: [0, 1, 1.75], fov: 25 }}
+      camera={{ position: [0, 1.1, 2.35], fov: 25 }}
     >
-      <ambientLight intensity={0.85} />
-      <spotLight
-        position={[5, -2, 1]}
-        penumbra={1}
-        castShadow
-      />
+      <ambientLight intensity={0.75} />
       <Suspense fallback={null}>
-        <Model model={{ path: '/models/poly.glb' }} />
+        <Model model={{ path: modelPath }} />
         <OrbitControls
           enableZoom={false}
           autoRotateSpeed={4}
@@ -49,7 +50,5 @@ const ThreeDeeEngine = () => {
     </Canvas>
   )
 }
-
-useLoader.preload(GLTFLoader, '/models/poly.glb')
 
 export default ThreeDeeEngine

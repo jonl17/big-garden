@@ -4,6 +4,7 @@ import { useTracker } from 'src/store/tracker'
 
 type DataProps = {
   coordinates: GeolocationCoordinates
+  children?: React.ReactNode
 }
 
 const Data: React.FC<DataProps> = ({

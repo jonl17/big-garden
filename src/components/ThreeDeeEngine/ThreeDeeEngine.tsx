@@ -42,15 +42,17 @@ const ThreeDeeEngine = ({
       frameloop='demand'
       camera={{ position: [0, 1.1, 2.35], fov: 25 }}
     >
-      <ambientLight intensity={0.75} />
+      <Suspense fallback={null}>
+        <ambientLight intensity={0.75} />
 
-      {modelPath && <Model model={{ path: modelPath }} />}
+        {modelPath && <Model model={{ path: modelPath }} />}
 
-      <OrbitControls
-        enableZoom={false}
-        autoRotateSpeed={4}
-        autoRotate={true}
-      />
+        <OrbitControls
+          enableZoom={false}
+          autoRotateSpeed={4}
+          autoRotate={true}
+        />
+      </Suspense>
     </Canvas>
   )
 }

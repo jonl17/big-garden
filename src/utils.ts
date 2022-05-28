@@ -62,5 +62,7 @@ export const resolveSculpture = (
         url: node.video.asset.url,
       }
     : undefined,
-  threeDeeModel: `/models/${node.threeDeeModel}`,
+  threeDeeModel: node.threeDeeModel
+    ? `/models/${node.threeDeeModel}`
+    : undefined,
 })

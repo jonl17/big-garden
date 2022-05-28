@@ -9,16 +9,18 @@ import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
 import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from 'src/types'
-import {
-  tileLayerAttribution,
-  tileLayerEndpoint,
-} from './mapBoxConfig'
 
 type Props = {
   sculptures: ISculpture[]
+  endpoint: string
+  attribution: string
 }
 
-const LeafletMap = ({ sculptures }: Props) => {
+const LeafletMap = ({
+  sculptures,
+  endpoint,
+  attribution,
+}: Props) => {
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
@@ -36,10 +38,7 @@ const LeafletMap = ({ sculptures }: Props) => {
       }}
       zoomControl={false}
     >
-      <TileLayer
-        attribution={tileLayerAttribution}
-        url={tileLayerEndpoint}
-      />
+      <TileLayer attribution={attribution} url={endpoint} />
       {/* events */}
       {sculptures.map((item, key) => (
         <Marker

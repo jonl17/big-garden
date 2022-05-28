@@ -1,5 +1,5 @@
 import { ISculpture } from '@types'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useInventory } from 'src/store/inventory'
 import { usePosition } from 'src/store/position'
 import { useTracker } from 'src/store/tracker'

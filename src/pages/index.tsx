@@ -20,9 +20,13 @@ import { resolveSculpture } from 'src/utils'
 
 type Props = {
   sculpturesRaw: any
+  mapboxEndpoint: string
 }
 
-const Home: NextPage<Props> = ({ sculpturesRaw }) => {
+const Home: NextPage<Props> = ({
+  sculpturesRaw,
+  mapboxEndpoint,
+}) => {
   const sculptures: ISculpture[] = sculpturesRaw.map(
     resolveSculpture
   )
@@ -42,13 +46,18 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
   const [controlPanelOpen, setControlPanelOpen] =
     useState(false)
 
+  console.log('rendering')
+
   return (
     <>
       <Head>
         <title>Sculpture Hunt</title>
       </Head>
       <div className='relative'>
-        <Map sculptures={sculptures} />
+        <Map
+          sculptures={sculptures}
+          mapboxEndpoint={mapboxEndpoint}
+        />
         <div className='absolute top-5 right-5'>
           {controlPanelOpen ? (
             <button
@@ -117,9 +126,14 @@ export default Home
 export const getStaticProps: GetStaticProps = async () => {
   const sculpturesRaw = await getClient().fetch(query)
 
+  const mapboxAccessToken =
+    process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+  const mapboxEndpoint = `https://api.mapbox.com/styles/v1/jonfiskur666/cl2xja6kd00ab15mur7qxc94o/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxAccessToken}`
+
   return {
     props: {
       sculpturesRaw,
+      mapboxEndpoint,
     },
   }
 }

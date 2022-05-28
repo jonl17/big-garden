@@ -49,7 +49,7 @@ const CollectButton = ({ sculptures }: Props) => {
   if (collectable) {
     return (
       <div className='fixed h-screen bg-white/80 z-50 w-full top-0 left-0'>
-        <div className='h-full w-full p-4 grid place-items-center'>
+        <div className='h-full w-full p-4 grid place-items-center pb-36'>
           <h1 className='text-6xl text-center italic mt-5'>
             Sculpture unlocked
           </h1>

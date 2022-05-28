@@ -1,4 +1,7 @@
+import Close from '@components/Close'
+import Header from '@components/Header'
 import ThreeDeeEngine from '@components/ThreeDeeEngine'
+import Image from 'next/image'
 import React from 'react'
 import { useModal } from 'src/store/modal'
 import { useSculptures } from 'src/store/sculptures'
@@ -14,19 +17,20 @@ const Modal = () => {
   if (!sculpture) return null
 
   return (
-    <div className='fixed top-0 left-0 w-full h-full p-5 lg:p-24 bg-white z-20'>
-      <button
-        onClick={() => closeModal()}
-        className='border px-3'
-      >
-        <h1 className='text-2xl'>LOKA</h1>
-      </button>
+    <div className='fixed top-0 left-0 w-full h-full lg:p-24 bg-white z-20'>
+      <Header toggle={() => closeModal()}>
+        <div className='relative h-16 w-16'>
+          <Image
+            className='h-full w-full'
+            objectFit='cover'
+            layout='fill'
+            src={sculpture.mapIcon.url}
+            alt={sculpture.title}
+          />
+        </div>
+      </Header>
       {sculpture && (
-        <div className='lg:p-10 h-full'>
-          <h1 className='text-5xl text-center mb-5'>
-            {sculpture.title}
-          </h1>
-
+        <div className='h-full'>
           {/* render 3d model */}
           <ThreeDeeEngine />
 

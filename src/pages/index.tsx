@@ -13,7 +13,9 @@ import { useInventory } from 'src/store/inventory'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
-import ThreeDeeEngine from '@components/ThreeDeeEngine'
+import Image from 'next/image'
+import { useLoader } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 type Props = {
   sculpturesRaw: any
@@ -83,13 +85,19 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
         <CollectButton sculptures={sculptures} />
 
         <button
-          className='absolute left-0 top-0'
+          className='absolute left-0 top-0 h-28 w-28'
           onClick={() => toggleInventory(true)}
         >
-          <img className='h-28' src='/bag.png' />
-          <p className='absolute top-16 left-12 text-xl'>
-            {inventory.length + 1}
-          </p>
+          <div className='relative h-full w-full'>
+            <Image
+              alt='Bag icon'
+              layout='fill'
+              src='/bag-yellow.png'
+            />
+            <p className='absolute top-16 left-12 text-xl'>
+              {inventory.length}
+            </p>
+          </div>
         </button>
 
         {isModalOpen && <Modal />}
@@ -97,6 +105,9 @@ const Home: NextPage<Props> = ({ sculpturesRaw }) => {
     </>
   )
 }
+
+// preload models
+useLoader.preload(GLTFLoader, '/models/poly.glb')
 
 const query = groq`
 *[_type == "sculpture"] {

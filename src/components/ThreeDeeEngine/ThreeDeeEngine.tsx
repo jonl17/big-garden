@@ -30,11 +30,11 @@ const ThreeDeeEngine = () => {
     <Canvas
       className='three-js-canvas'
       frameloop='demand'
-      camera={{ position: [0, 1, 1.75], fov: 25 }}
+      camera={{ position: [0, 1.1, 2.35], fov: 25 }}
     >
-      <ambientLight intensity={0.85} />
+      <ambientLight intensity={0.75} />
       <spotLight
-        position={[5, -2, 1]}
+        position={[0, -2, 1]}
         penumbra={1}
         castShadow
       />
@@ -49,7 +49,5 @@ const ThreeDeeEngine = () => {
     </Canvas>
   )
 }
-
-useLoader.preload(GLTFLoader, '/models/poly.glb')
 
 export default ThreeDeeEngine

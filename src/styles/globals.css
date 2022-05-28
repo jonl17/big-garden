@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: Savratika;
+  font-weight: normal;
+  font-style: normal;
+  src: url('/sarvatrika.woff2') format('woff2');
+}
+
+@layer base {
+  html {
+    @apply font-savratika antialiased;
+  }
+}

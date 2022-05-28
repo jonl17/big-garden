@@ -12,7 +12,7 @@ const Header = ({ toggle, children }: Props) => {
       {children ? children : <span />}
       <button
         onClick={toggle}
-        className='relative w-16 h-16 p-4 border-black grid place-items-center'
+        className='relative w-14 h-14 p-4 border-black grid place-items-center'
       >
         <Close className='fill-black h-full w-full' />
       </button>

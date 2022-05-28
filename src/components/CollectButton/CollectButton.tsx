@@ -51,7 +51,7 @@ const CollectButton = ({ sculptures }: Props) => {
       <div className='fixed h-screen bg-white/80 z-50 w-full top-0 left-0'>
         <div className='h-full w-full p-4 grid place-items-center'>
           <h1 className='text-6xl text-center italic mt-5'>
-            Unlocked
+            Sculpture unlocked
           </h1>
           <img
             className='h-full w-full object-contain'
@@ -62,7 +62,7 @@ const CollectButton = ({ sculptures }: Props) => {
             className='px-10 py-5 border bg-red rounded-2xl'
             onClick={() => callback(collectable.id)}
           >
-            <h2 className='text-4xl uppercase text-white'>
+            <h2 className='text-4xl uppercase text-white mt-1'>
               collect
             </h2>
           </button>

@@ -23,14 +23,14 @@ const Inventory = ({ sculptures }: Props) => {
           <h1 className='text-xl flex place-items-center'>{`Collected sculptures (${collectedSculptures.length}/${sculptures.length})`}</h1>
         </Header>
       </div>
-      <div className='grid w-full grid-cols-2 place-items-center'>
+      <div className='grid w-full grid-cols-3'>
         {collectedSculptures.map((item, key) => (
           <button
             key={key}
             onClick={() => {
               openModal(item.id)
             }}
-            className='h-44 w-44 relative'
+            className='h-36 w-36 md:h-56 md:w-56 relative'
           >
             <img
               src={item.mapIcon.url}

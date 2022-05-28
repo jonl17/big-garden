@@ -4,8 +4,26 @@ import {
   extend,
   useLoader,
 } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import {
+  Html,
+  OrbitControls,
+  useProgress,
+} from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import cn from 'classnames'
+
+const Loader = () => {
+  const { progress } = useProgress()
+  console.log(progress)
+  return (
+    <Html
+      className='text-black absolute top-12 left-1/2'
+      center
+    >
+      {progress} % loaded
+    </Html>
+  )
+}
 
 extend({ OrbitControls })
 
@@ -22,7 +40,7 @@ const Model = ({ model }: ModelProps) => {
 }
 
 interface IThreeDeeEngineProps {
-  modelPath: string
+  modelPath?: string
 }
 
 const ThreeDeeEngine = ({
@@ -32,21 +50,26 @@ const ThreeDeeEngine = ({
 
   if (!isBrowser) return null
 
+  const { progress } = useProgress()
+
   return (
     <Canvas
-      className='three-js-canvas'
+      className={cn('three-js-canvas', {
+        block: modelPath,
+        hidden: !modelPath,
+      })}
       frameloop='demand'
       camera={{ position: [0, 1.1, 2.35], fov: 25 }}
     >
       <ambientLight intensity={0.75} />
-      <Suspense fallback={null}>
-        <Model model={{ path: modelPath }} />
-        <OrbitControls
-          enableZoom={false}
-          autoRotateSpeed={4}
-          autoRotate={true}
-        />
-      </Suspense>
+
+      {modelPath && <Model model={{ path: modelPath }} />}
+
+      <OrbitControls
+        enableZoom={false}
+        autoRotateSpeed={4}
+        autoRotate={true}
+      />
     </Canvas>
   )
 }

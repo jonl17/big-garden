@@ -36,8 +36,6 @@ const Home: NextPage<Props> = ({
     updateSculptures(sculptures)
   }, [])
 
-  const { isOpen: isModalOpen } = useModal()
-
   useWatchPosition(sculptures)
   const { inventoryOpen, toggleInventory, inventory } =
     useInventory()
@@ -91,7 +89,7 @@ const Home: NextPage<Props> = ({
           </div>
         </button>
 
-        {isModalOpen && <Modal />}
+        <Modal />
       </div>
     </>
   )

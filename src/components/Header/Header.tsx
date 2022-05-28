@@ -8,7 +8,7 @@ type Props = {
 
 const Header = ({ toggle, children }: Props) => {
   return (
-    <nav className='flex justify-between w-full p-5'>
+    <nav className='flex justify-between w-full p-5 relative z-20'>
       {children ? children : <span />}
       <button
         onClick={toggle}

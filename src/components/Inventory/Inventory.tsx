@@ -20,7 +20,7 @@ const Inventory = ({ sculptures }: Props) => {
     <div className='top-0 left-0 h-screen bg-white/80 fixed w-full z-10'>
       <div className='h-[100px] w-full'>
         <Header toggle={() => toggleInventory(false)}>
-          <h1 className='text-xl'>{`Collected sculptures (${collectedSculptures.length}/${sculptures.length})`}</h1>
+          <h1 className='text-xl flex place-items-center'>{`Collected sculptures (${collectedSculptures.length}/${sculptures.length})`}</h1>
         </Header>
       </div>
       <div className='grid w-full grid-cols-2 place-items-center'>

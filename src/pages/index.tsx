@@ -13,11 +13,9 @@ import { useInventory } from 'src/store/inventory'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
-import bagIcon from '../../public/bag-yellow.png'
 
 type Props = {
   sculpturesRaw: any
@@ -86,11 +84,7 @@ const Home: NextPage<Props> = ({
           onClick={() => toggleInventory(true)}
         >
           <div className='relative h-full w-full'>
-            <Image
-              alt='Bag icon'
-              layout='fill'
-              src={bagIcon}
-            />
+            <img alt='Bag icon' src='/bag-yellow.png' />
             <p className='absolute top-16 left-12 text-xl'>
               {inventory.length}
             </p>

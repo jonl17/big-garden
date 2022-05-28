@@ -20,10 +20,8 @@ const Modal = () => {
     <div className='fixed top-0 left-0 w-full h-full lg:p-24 bg-white z-20'>
       <Header toggle={() => closeModal()}>
         <div className='relative h-16 w-16'>
-          <Image
+          <img
             className='h-full w-full'
-            objectFit='cover'
-            layout='fill'
             src={sculpture.mapIcon.url}
             alt={sculpture.title}
           />

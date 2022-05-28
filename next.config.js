@@ -14,4 +14,8 @@ module.exports = {
   images: {
     domains: ['cdn.sanity.io'],
   },
+  env: {
+    sanityProjectId:
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  },
 }

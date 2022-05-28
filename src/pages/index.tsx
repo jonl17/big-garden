@@ -17,6 +17,7 @@ import Image from 'next/image'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
+import bagIcon from '../../public/bag-yellow.png'
 
 type Props = {
   sculpturesRaw: any
@@ -88,7 +89,7 @@ const Home: NextPage<Props> = ({
             <Image
               alt='Bag icon'
               layout='fill'
-              src='/bag-yellow.png'
+              src={bagIcon}
             />
             <p className='absolute top-16 left-12 text-xl'>
               {inventory.length}

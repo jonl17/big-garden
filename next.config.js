@@ -18,4 +18,7 @@ module.exports = {
     sanityProjectId:
       process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   },
+  rules: {
+    '@next/next/no-img-element': 'off',
+  },
 }

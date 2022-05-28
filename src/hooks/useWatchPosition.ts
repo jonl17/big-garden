@@ -14,8 +14,7 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
     updateCoordinates(gp.coords)
     // check distance to sculptures
     updateTracking(
-      sculptures.map((sc) => {
-        const id = sc.id
+      sculptures.map((sc, idx) => {
         const name = sc.title
         const { isInProximity, meters } = checkProximity(
           {
@@ -26,10 +25,10 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
         )
         return {
           distance: meters,
-          id,
-          isInProximity,
+          isInProximity: idx === 0 ? true : isInProximity,
           name,
-          collected: !!findItem(id),
+          collected: !!findItem(sc.id),
+          ...sc,
         }
       })
     )

@@ -1,12 +1,12 @@
+import { ISculpture } from '@types'
 import create from 'zustand'
 
 type TrackType = {
-  id: string
   name: string
   distance: number
   isInProximity: boolean
   collected: boolean
-}
+} & ISculpture
 
 interface TrackerStore {
   tracked: TrackType[]

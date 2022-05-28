@@ -3,7 +3,6 @@ import { ISculpture } from '@types'
 import React from 'react'
 import { useInventory } from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
-import { usePosition } from 'src/store/position'
 import { useTracker } from 'src/store/tracker'
 import { checkProximity } from 'src/utils'
 
@@ -36,10 +35,10 @@ const CollectButton = ({ sculptures }: Props) => {
           )
           return {
             distance: meters,
-            id,
             isInProximity,
             name,
             collected: !!findItem(id),
+            ...sc,
           }
         })
       )
@@ -49,13 +48,25 @@ const CollectButton = ({ sculptures }: Props) => {
 
   if (collectable) {
     return (
-      <div className='fixed h-full w-full top-0 left-0 grid place-items-center'>
-        <button
-          className='px-10 py-5 bg-white border'
-          onClick={() => callback(collectable.id)}
-        >
-          <h2 className='text-2xl'>{`Collect sculpture: ${collectable.name}`}</h2>
-        </button>
+      <div className='fixed h-screen bg-white/80 z-50 w-full top-0 left-0'>
+        <div className='h-full w-full p-4 grid place-items-center'>
+          <h1 className='text-6xl text-center italic mt-5'>
+            Unlocked
+          </h1>
+          <img
+            className='h-full w-full object-contain'
+            src={collectable.mapIcon.url}
+            alt={collectable.mapIcon.alt}
+          />
+          <button
+            className='px-10 py-5 border bg-red rounded-2xl'
+            onClick={() => callback(collectable.id)}
+          >
+            <h2 className='text-4xl uppercase text-white'>
+              collect
+            </h2>
+          </button>
+        </div>
       </div>
     )
   }

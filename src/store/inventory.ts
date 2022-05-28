@@ -17,7 +17,7 @@ const TEST_INVENTORY = [
 export const useInventory = create<InventoryState>(
   (set, get) => ({
     inventoryOpen: false,
-    inventory: TEST_INVENTORY,
+    inventory: [],
     toggleInventory: (inventoryOpen) =>
       set(() => ({
         inventoryOpen,

@@ -4,26 +4,9 @@ import {
   extend,
   useLoader,
 } from '@react-three/fiber'
-import {
-  Html,
-  OrbitControls,
-  useProgress,
-} from '@react-three/drei'
+import { Html, OrbitControls } from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import cn from 'classnames'
-
-const Loader = () => {
-  const { progress } = useProgress()
-  console.log(progress)
-  return (
-    <Html
-      className='text-black absolute top-12 left-1/2'
-      center
-    >
-      {progress} % loaded
-    </Html>
-  )
-}
 
 extend({ OrbitControls })
 
@@ -49,8 +32,6 @@ const ThreeDeeEngine = ({
   const isBrowser = typeof window !== 'undefined'
 
   if (!isBrowser) return null
-
-  const { progress } = useProgress()
 
   return (
     <Canvas

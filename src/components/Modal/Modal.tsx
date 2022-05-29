@@ -4,6 +4,7 @@ import React from 'react'
 import { useModal } from 'src/store/modal'
 import { useSculptures } from 'src/store/sculptures'
 import cn from 'classnames'
+import Image from 'next/image'
 
 const Modal = () => {
   const { closeModal, sculptureId, isOpen } = useModal()
@@ -26,10 +27,11 @@ const Modal = () => {
       <Header toggle={() => closeModal()}>
         {sculpture && (
           <div className='relative h-16 w-16'>
-            <img
+            <Image
               className='h-full w-full'
               src={sculpture.mapIcon.url}
               alt={sculpture.title}
+              layout='fill'
             />
           </div>
         )}

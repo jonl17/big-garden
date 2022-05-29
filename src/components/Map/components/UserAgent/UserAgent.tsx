@@ -38,7 +38,9 @@ const UserAgent = () => {
         icon={icon('/kall-icon.png')}
         title={username}
       >
-        <Tooltip permanent>{username}</Tooltip>
+        <Tooltip className='font-savratika' permanent>
+          {username}
+        </Tooltip>
       </Marker>
     )
   } else return null

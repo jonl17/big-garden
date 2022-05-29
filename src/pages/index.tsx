@@ -19,13 +19,12 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
 import Image from 'next/image'
-import { useMap, useMapEvents } from 'react-leaflet'
-import { usePosition } from 'src/store/position'
 import StartingScreen from '@components/StartingScreen'
 import {
   getUserFromLocalStorage,
   saveUserToLocalStorage,
 } from 'src/store/user'
+import cn from 'classnames'
 
 type Props = {
   sculpturesRaw: any
@@ -77,7 +76,12 @@ const Home: NextPage<Props> = ({
 
   if (!started) {
     return (
-      <div className='relative'>
+      <div
+        className={cn('relative', {
+          'opacity-0': !started,
+          'opacity-100': started,
+        })}
+      >
         <StartingScreen startGame={startGame} />
       </div>
     )

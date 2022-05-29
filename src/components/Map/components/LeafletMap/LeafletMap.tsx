@@ -32,7 +32,7 @@ const LeafletMap = ({
   return (
     <MapContainer
       className='h-screen w-full z-0'
-      zoom={17}
+      zoom={16}
       center={sculptureGardenCenter}
       zoomControl={false}
     >

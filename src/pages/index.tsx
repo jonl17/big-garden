@@ -16,6 +16,7 @@ import Head from 'next/head'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
+import Image from 'next/image'
 
 type Props = {
   sculpturesRaw: any
@@ -82,7 +83,11 @@ const Home: NextPage<Props> = ({
           onClick={() => toggleInventory(true)}
         >
           <div className='relative h-full w-full'>
-            <img alt='Bag icon' src='/bag-yellow.png' />
+            <Image
+              layout='fill'
+              alt='Bag icon'
+              src='/bag-yellow.png'
+            />
             <p className='absolute top-16 left-12 text-xl'>
               {inventory.length}
             </p>

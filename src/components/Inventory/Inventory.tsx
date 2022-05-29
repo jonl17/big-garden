@@ -3,6 +3,7 @@ import React from 'react'
 import { useInventory } from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
 import Header from '@components/Header'
+import Image from 'next/image'
 
 type Props = {
   sculptures: ISculpture[]
@@ -32,10 +33,11 @@ const Inventory = ({ sculptures }: Props) => {
             }}
             className='h-36 w-36 md:h-56 md:w-56 relative'
           >
-            <img
+            <Image
               src={item.mapIcon.url}
               alt='bag icon'
               className='h-full w-full'
+              layout='fill'
             />
           </button>
         ))}

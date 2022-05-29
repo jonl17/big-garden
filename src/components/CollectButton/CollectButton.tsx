@@ -1,5 +1,6 @@
 import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from '@types'
+import Image from 'next/image'
 import React from 'react'
 import { useInventory } from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
@@ -53,11 +54,15 @@ const CollectButton = ({ sculptures }: Props) => {
           <h1 className='text-6xl text-center italic mt-5'>
             Sculpture unlocked
           </h1>
-          <img
-            className='h-full w-full object-contain'
-            src={collectable.mapIcon.url}
-            alt={collectable.mapIcon.alt}
-          />
+          <div className='h-72 w-full relative'>
+            <Image
+              className='h-full w-full'
+              src={collectable.mapIcon.url}
+              alt={collectable.mapIcon.alt}
+              layout='fill'
+              objectFit='contain'
+            />
+          </div>
           <button
             className='px-10 py-5 border bg-red rounded-2xl'
             onClick={() => callback(collectable.id)}

@@ -7,7 +7,7 @@ type Props = {
 const StartingScreen = ({ startGame }: Props) => {
   const [username, setUsername] = useState('')
   return (
-    <section className='h-screen w-full fixed top-0 left-0 z-50 bg-white px-5 grid gap-5 place-content-center'>
+    <section className='h-screen w-full fixed top-0 left-0 z-50 bg-white px-5 grid gap-5 pb-24 place-content-center'>
       <h1 className='text-4xl italic'>
         Welcome to Sculpture Hunt!
       </h1>

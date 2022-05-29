@@ -19,7 +19,7 @@ const Map = ({ sculptures, mapboxEndpoint }: Props) => {
 
   const { coordinates } = usePosition()
 
-  if (!coordinates) return <p>Loading coordinates</p>
+  // if (!coordinates) return <p>Loading coordinates</p>
 
   return (
     <LeafletMap

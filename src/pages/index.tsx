@@ -30,7 +30,6 @@ const Home: NextPage<Props> = ({
   const sculptures: ISculpture[] = sculpturesRaw.map(
     resolveSculpture
   )
-
   const { updateSculptures } = useSculptures()
 
   useEffect(() => {
@@ -43,8 +42,6 @@ const Home: NextPage<Props> = ({
 
   const [controlPanelOpen, setControlPanelOpen] =
     useState(false)
-
-  console.log('rendering')
 
   return (
     <>
@@ -115,7 +112,8 @@ const query = groq`
     },
     title,
     coordinates,
-    threeDeeModel
+    threeDeeModel,
+    proximity
 }
 `
 

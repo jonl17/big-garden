@@ -32,7 +32,8 @@ const CollectButton = ({ sculptures }: Props) => {
               lat: position.latitude,
               lng: position.longitude,
             },
-            sc.coordinates
+            sc.coordinates,
+            sc.proximity
           )
           return {
             distance: meters,

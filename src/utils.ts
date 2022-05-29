@@ -65,4 +65,10 @@ export const resolveSculpture = (
   threeDeeModel: node.threeDeeModel
     ? `/models/${node.threeDeeModel}`
     : undefined,
+  proximity: node.proximity ?? 15,
 })
+
+export const sculptureGardenCenter = {
+  lat: 64.140997,
+  lng: -21.963806,
+}

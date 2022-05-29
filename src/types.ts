@@ -28,4 +28,5 @@ export interface ISculpture {
   }
   threeDeeModel?: string
   description?: string
+  proximity?: number
 }

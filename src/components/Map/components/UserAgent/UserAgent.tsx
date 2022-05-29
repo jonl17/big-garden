@@ -17,8 +17,9 @@ const UserAgent = () => {
           lng: coordinates.longitude,
         }}
         icon={icon('/kall-icon.png')}
+        title='bob'
       >
-        <Tooltip>You are here!</Tooltip>
+        <Tooltip permanent>You are here!</Tooltip>
       </Marker>
     )
   } else return null

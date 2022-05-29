@@ -38,6 +38,11 @@ const Sculpture = {
       title: 'Description',
       type: 'text',
     },
+    {
+      name: 'proximity',
+      title: 'Proximity',
+      type: 'number',
+    },
   ],
 }
 

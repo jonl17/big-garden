@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Marker, Tooltip, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import { usePosition } from 'src/store/position'
+import { getUserFromLocalStorage } from 'src/store/user'
 
 const UserAgent = () => {
   const icon = (iconUrl: string) =>
@@ -10,7 +11,11 @@ const UserAgent = () => {
   const { coordinates } = usePosition()
   const map = useMap()
 
+  const [username, setUsername] = useState('')
+
   useEffect(() => {
+    const user = getUserFromLocalStorage()
+    setUsername(user ?? 'Art explorer')
     if (coordinates && map) {
       setTimeout(
         () =>
@@ -31,9 +36,9 @@ const UserAgent = () => {
           lng: coordinates.longitude,
         }}
         icon={icon('/kall-icon.png')}
-        title='bob'
+        title={username}
       >
-        <Tooltip permanent>You are here!</Tooltip>
+        <Tooltip permanent>{username}</Tooltip>
       </Marker>
     )
   } else return null

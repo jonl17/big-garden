@@ -21,6 +21,11 @@ import { resolveSculpture } from 'src/utils'
 import Image from 'next/image'
 import { useMap, useMapEvents } from 'react-leaflet'
 import { usePosition } from 'src/store/position'
+import StartingScreen from '@components/StartingScreen'
+import {
+  getUserFromLocalStorage,
+  saveUserToLocalStorage,
+} from 'src/store/user'
 
 type Props = {
   sculpturesRaw: any
@@ -50,11 +55,33 @@ const Home: NextPage<Props> = ({
 
   const [controlPanelOpen, setControlPanelOpen] =
     useState(false)
+  const [started, setStarted] = useState(false)
+
+  const startGame = (username: string) => {
+    setStarted(true)
+    saveUserToLocalStorage(
+      username.length > 0 ? username : 'Art explorer'
+    )
+    if (navigator) {
+      navigator.vibrate(200)
+    }
+  }
 
   useEffect(() => {
     const storedInventory = loadFromLocalStorage()
     initInventory(storedInventory)
+    const username = getUserFromLocalStorage()
+    if (username) setStarted(true)
+    else setStarted(false)
   }, [])
+
+  if (!started) {
+    return (
+      <div className='relative'>
+        <StartingScreen startGame={startGame} />
+      </div>
+    )
+  }
 
   return (
     <>

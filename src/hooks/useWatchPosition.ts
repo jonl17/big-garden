@@ -25,7 +25,7 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
         )
         return {
           distance: meters,
-          isInProximity: idx === 0 ? true : isInProximity,
+          isInProximity,
           name,
           collected: !!findItem(sc.id),
           ...sc,

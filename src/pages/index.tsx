@@ -9,7 +9,10 @@ import { useModal } from 'src/store/modal'
 import useWatchPosition from '@hooks/useWatchPosition'
 import { useEffect, useState } from 'react'
 import Inventory from '@components/Inventory'
-import { useInventory } from 'src/store/inventory'
+import {
+  loadFromLocalStorage,
+  useInventory,
+} from 'src/store/inventory'
 import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
@@ -39,11 +42,20 @@ const Home: NextPage<Props> = ({
   }, [])
 
   useWatchPosition(sculptures)
-  const { inventoryOpen, toggleInventory, inventory } =
-    useInventory()
+  const {
+    inventoryOpen,
+    toggleInventory,
+    inventory,
+    initInventory,
+  } = useInventory()
 
   const [controlPanelOpen, setControlPanelOpen] =
     useState(false)
+
+  useEffect(() => {
+    const storedInventory = loadFromLocalStorage()
+    initInventory(storedInventory)
+  }, [])
 
   return (
     <>

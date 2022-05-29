@@ -6,6 +6,7 @@ interface InventoryState {
   toggleInventory: (open: boolean) => void
   addToInventory: (item: string) => void
   findItem: (id: string) => string | undefined
+  initInventory: (items: string[]) => void
 }
 
 const TEST_INVENTORY = [
@@ -13,6 +14,26 @@ const TEST_INVENTORY = [
   '7f8f6e2e-bf11-498b-8a1f-761ef2522a85',
   'bca5c478-497f-4c2e-9987-560b621ce511',
 ]
+
+const KEY = 'Sculpture Hunt Inventory'
+
+export const saveToLocalStorage = (id: string) => {
+  const currentInventory = loadFromLocalStorage()
+  const updatedInventory = currentInventory.includes(id)
+    ? currentInventory
+    : [...currentInventory, id]
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(updatedInventory)
+  )
+}
+export const loadFromLocalStorage = (): string[] => {
+  const inventory = localStorage.getItem(KEY)
+  if (inventory) {
+    return JSON.parse(inventory)
+  }
+  return []
+}
 
 export const useInventory = create<InventoryState>(
   (set, get) => ({
@@ -22,11 +43,14 @@ export const useInventory = create<InventoryState>(
       set(() => ({
         inventoryOpen,
       })),
-    addToInventory: (item) =>
-      set((store) => ({
+    addToInventory: (item) => {
+      return set((store) => ({
         inventory: [...store.inventory, item],
-      })),
+      }))
+    },
     findItem: (id) =>
       get().inventory.find((item) => item === id),
+    initInventory: (inventory) =>
+      set(() => ({ inventory })),
   })
 )

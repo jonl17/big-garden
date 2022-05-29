@@ -2,7 +2,10 @@ import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from '@types'
 import Image from 'next/image'
 import React from 'react'
-import { useInventory } from 'src/store/inventory'
+import {
+  saveToLocalStorage,
+  useInventory,
+} from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
 import { useTracker } from 'src/store/tracker'
 import { checkProximity } from 'src/utils'
@@ -23,6 +26,7 @@ const CollectButton = ({ sculptures }: Props) => {
   const callback = (id: string) => {
     if (!findItem(id) && position) {
       addToInventory(id)
+      saveToLocalStorage(id)
       updateTracking(
         sculptures.map((sc) => {
           const id = sc.id

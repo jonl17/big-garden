@@ -3,6 +3,7 @@ import { Marker, Tooltip, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import { usePosition } from 'src/store/position'
 import { getUserFromLocalStorage } from 'src/store/user'
+import { useGame } from 'src/store/game'
 
 const UserAgent = () => {
   const icon = (iconUrl: string) =>
@@ -12,11 +13,12 @@ const UserAgent = () => {
   const map = useMap()
 
   const [username, setUsername] = useState('')
+  const { started, setStarted } = useGame()
 
   useEffect(() => {
     const user = getUserFromLocalStorage()
     setUsername(user ?? 'Art explorer')
-    if (coordinates && map) {
+    if (coordinates && map && !started) {
       setTimeout(
         () =>
           map.flyTo({
@@ -25,6 +27,7 @@ const UserAgent = () => {
           }),
         3000
       )
+      setStarted()
     }
   }, [coordinates, map])
 

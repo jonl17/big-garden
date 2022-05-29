@@ -17,6 +17,8 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
 import Image from 'next/image'
+import { useMap, useMapEvents } from 'react-leaflet'
+import { usePosition } from 'src/store/position'
 
 type Props = {
   sculpturesRaw: any

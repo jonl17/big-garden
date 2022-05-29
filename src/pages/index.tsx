@@ -66,7 +66,7 @@ const Home: NextPage<Props> = ({
           sculptures={sculptures}
           mapboxEndpoint={mapboxEndpoint}
         />
-        <div className='absolute top-5 right-5'>
+        {/* <div className='absolute top-5 right-5'>
           {controlPanelOpen ? (
             <button
               onClick={() => setControlPanelOpen(false)}
@@ -80,7 +80,7 @@ const Home: NextPage<Props> = ({
               <p>Open control panel</p>
             </button>
           )}
-        </div>
+        </div> */}
 
         {inventoryOpen && (
           <Inventory sculptures={sculptures} />

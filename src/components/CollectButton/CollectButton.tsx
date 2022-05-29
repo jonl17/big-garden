@@ -25,7 +25,7 @@ const CollectButton = ({ sculptures }: Props) => {
 
   const callback = (id: string) => {
     if (!findItem(id) && position) {
-      if (navigator) {
+      if (navigator && navigator.vibrate) {
         navigator.vibrate(300)
       }
       addToInventory(id)

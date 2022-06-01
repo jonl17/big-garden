@@ -38,7 +38,7 @@ export const loadFromLocalStorage = (): string[] => {
 export const useInventory = create<InventoryState>(
   (set, get) => ({
     inventoryOpen: false,
-    inventory: [],
+    inventory: TEST_INVENTORY,
     toggleInventory: (inventoryOpen) =>
       set(() => ({
         inventoryOpen,

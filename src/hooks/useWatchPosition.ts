@@ -1,5 +1,5 @@
 import { ISculpture } from '@types'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useInventory } from 'src/store/inventory'
 import { usePosition } from 'src/store/position'
 import { useTracker } from 'src/store/tracker'
@@ -25,7 +25,11 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
         )
         return {
           distance: meters,
-          isInProximity,
+          isInProximity:
+            sc.title === 'Sækúla' ||
+            sc.title === 'Spíralkúla'
+              ? true
+              : isInProximity,
           name,
           collected: !!findItem(sc.id),
           ...sc,

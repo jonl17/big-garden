@@ -52,8 +52,6 @@ const Home: NextPage<Props> = ({
     initInventory,
   } = useInventory()
 
-  const [controlPanelOpen, setControlPanelOpen] =
-    useState(false)
   const [started, setStarted] = useState(false)
 
   const startGame = (username: string) => {
@@ -78,8 +76,8 @@ const Home: NextPage<Props> = ({
     return (
       <div
         className={cn('relative', {
-          'opacity-0': !started,
-          'opacity-100': started,
+          'opacity-0': started,
+          'opacity-100': !started,
         })}
       >
         <StartingScreen startGame={startGame} />
@@ -97,21 +95,6 @@ const Home: NextPage<Props> = ({
           sculptures={sculptures}
           mapboxEndpoint={mapboxEndpoint}
         />
-        {/* <div className='absolute top-5 right-5'>
-          {controlPanelOpen ? (
-            <button
-              onClick={() => setControlPanelOpen(false)}
-            >
-              <ControlPanel />
-            </button>
-          ) : (
-            <button
-              onClick={() => setControlPanelOpen(true)}
-            >
-              <p>Open control panel</p>
-            </button>
-          )}
-        </div> */}
 
         {inventoryOpen && (
           <Inventory sculptures={sculptures} />
@@ -149,7 +132,7 @@ const query = groq`
 *[_type == "sculpture"] {
     _id,
     mapIcon { 
-    asset->
+      asset->
     },
     video {
     asset->
@@ -157,7 +140,10 @@ const query = groq`
     title,
     coordinates,
     threeDeeModel,
-    proximity
+    proximity,
+    panorama {
+      asset->
+    }
 }
 `
 

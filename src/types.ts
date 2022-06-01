@@ -1,5 +1,3 @@
-import { LatLng, LatLngTuple } from 'leaflet'
-
 export type ImageType = {
   alt: string
   url: string
@@ -29,4 +27,5 @@ export interface ISculpture {
   threeDeeModel?: string
   description?: string
   proximity?: number
+  panorama?: ImageType
 }

@@ -66,6 +66,12 @@ export const resolveSculpture = (
     ? `/models/${node.threeDeeModel}`
     : undefined,
   proximity: node.proximity ?? 15,
+  panorama: node.panorama
+    ? {
+        url: node.panorama.asset.url,
+        alt: 'panorama',
+      }
+    : undefined,
 })
 
 export const sculptureGardenCenter = {

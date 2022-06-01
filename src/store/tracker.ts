@@ -1,7 +1,7 @@
 import { ISculpture } from '@types'
 import create from 'zustand'
 
-type TrackType = {
+export type TrackType = {
   name: string
   distance: number
   isInProximity: boolean

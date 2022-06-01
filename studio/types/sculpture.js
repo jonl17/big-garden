@@ -43,6 +43,11 @@ const Sculpture = {
       title: 'Proximity',
       type: 'number',
     },
+    {
+      name: 'panorama',
+      title: 'Panorama',
+      type: 'image',
+    },
   ],
 }
 

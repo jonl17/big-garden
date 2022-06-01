@@ -1,13 +1,13 @@
 import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from '@types'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   saveToLocalStorage,
   useInventory,
 } from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
-import { useTracker } from 'src/store/tracker'
+import { TrackType, useTracker } from 'src/store/tracker'
 import { checkProximity } from 'src/utils'
 
 type Props = {
@@ -15,13 +15,37 @@ type Props = {
 }
 
 const CollectButton = ({ sculptures }: Props) => {
-  const { addToInventory, findItem } = useInventory()
+  const { addToInventory, findItem, inventory } =
+    useInventory()
   const { tracked, updateTracking } = useTracker()
-  const collectable = tracked.find(
-    (t) => t.isInProximity && !t.collected
-  )
+
   const { position } = useGetCurrentPosition()
   const { openModal } = useModal()
+
+  const [collectable, setCollectable] =
+    useState<TrackType>()
+
+  useEffect(() => {
+    const collectable = tracked.find(
+      (t) => t.isInProximity && !t.collected
+    )
+    if (collectable) {
+      setCollectable(collectable)
+    }
+  }, [tracked])
+
+  useEffect(() => {
+    if (collectable) {
+      if (inventory.includes(collectable.id)) {
+        setCollectable(undefined)
+      } else {
+        // if user does nothing close the damn thing!
+        setTimeout(() => {
+          setCollectable(undefined)
+        }, 30000)
+      }
+    }
+  }, [inventory, collectable])
 
   const callback = (id: string) => {
     if (!findItem(id) && position) {

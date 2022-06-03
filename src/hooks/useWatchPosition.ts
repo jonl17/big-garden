@@ -25,11 +25,7 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
         )
         return {
           distance: meters,
-          isInProximity:
-            sc.title === 'Sækúla' ||
-            sc.title === 'Spíralkúla'
-              ? true
-              : isInProximity,
+          isInProximity,
           name,
           collected: !!findItem(sc.id),
           ...sc,

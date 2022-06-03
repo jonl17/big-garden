@@ -16,8 +16,7 @@ type PanoramaProps = {
 }
 
 const Panorama = ({ path }: PanoramaProps) => {
-  const map = useLoader(THREE.TextureLoader, path)
-
+  const map = useLoader(THREE.TextureLoader, path ?? '')
   return (
     <mesh scale={[-1, 1, 1]}>
       <sphereBufferGeometry args={[500, 60, 40]} />
@@ -55,14 +54,16 @@ const ThreeDeeEngine = ({
 
   if (!isBrowser) return null
 
+  console.log('loading canvas?')
+
   return (
     <Canvas
       className={cn('three-js-canvas', {
-        block: modelPath,
-        hidden: !modelPath,
+        // block: modelPath,
+        // hidden: !modelPath,
       })}
       frameloop='demand'
-      camera={{ position: [0, 1.1, 2.35], fov: 25 }}
+      camera={{ position: [300, 300, -20], fov: 25 }}
     >
       <Suspense fallback={null}>
         <ambientLight intensity={0.75} />
@@ -72,7 +73,7 @@ const ThreeDeeEngine = ({
         <OrbitControls
           enableZoom={false}
           autoRotateSpeed={4}
-          autoRotate={true}
+          autoRotate={false}
         />
       </Suspense>
     </Canvas>

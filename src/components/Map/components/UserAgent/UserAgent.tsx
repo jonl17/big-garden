@@ -29,7 +29,7 @@ const UserAgent = () => {
       )
       setStarted()
     }
-  }, [coordinates, map])
+  }, [])
 
   if (coordinates) {
     return (

@@ -59,9 +59,6 @@ const Home: NextPage<Props> = ({
     saveUserToLocalStorage(
       username.length > 0 ? username : 'Art explorer'
     )
-    if (navigator && navigator.vibrate) {
-      navigator.vibrate(200)
-    }
   }
 
   useEffect(() => {

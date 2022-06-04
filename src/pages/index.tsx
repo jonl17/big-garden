@@ -44,7 +44,7 @@ const Home: NextPage<Props> = ({
     updateSculptures(sculptures)
   }, [])
 
-  useWatchPosition(sculptures)
+  // useWatchPosition(sculptures)
   const {
     inventoryOpen,
     toggleInventory,

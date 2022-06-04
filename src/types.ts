@@ -29,3 +29,7 @@ export interface ISculpture {
   proximity?: number
   panorama?: ImageType
 }
+
+export interface IUser {
+  username: string
+}

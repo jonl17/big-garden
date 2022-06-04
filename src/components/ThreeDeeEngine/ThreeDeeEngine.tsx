@@ -4,28 +4,24 @@ import {
   extend,
   useLoader,
 } from '@react-three/fiber'
-import { Html, OrbitControls } from '@react-three/drei'
+import {
+  Html,
+  OrbitControls,
+  useProgress,
+} from '@react-three/drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import cn from 'classnames'
 import * as THREE from 'three'
 
 extend({ OrbitControls })
 
-type PanoramaProps = {
-  path: string
-}
+const Loading = () => {
+  const prog = useProgress()
 
-const Panorama = ({ path }: PanoramaProps) => {
-  const map = useLoader(THREE.TextureLoader, path ?? '')
   return (
-    <mesh scale={[-1, 1, 1]}>
-      <sphereBufferGeometry args={[500, 60, 40]} />
-      <meshBasicMaterial
-        map={map}
-        side={THREE.BackSide}
-        opacity={1}
-      />
-    </mesh>
+    <Html>
+      <p className='text-5xl'>{`${prog.progress}%`}</p>
+    </Html>
   )
 }
 
@@ -60,16 +56,17 @@ const ThreeDeeEngine = ({
         hidden: !modelPath,
       })}
       frameloop='demand'
-      camera={{ position: [300, 300, -20], fov: 25 }}
+      camera={{ position: [0, 0, -5], fov: 25 }}
     >
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loading />}>
         <ambientLight intensity={0.75} />
         {modelPath && <Model model={{ path: modelPath }} />}
 
         <OrbitControls
           enableZoom={false}
           autoRotateSpeed={4}
-          autoRotate={false}
+          autoRotate={true}
+          maxPolarAngle={1.1}
         />
       </Suspense>
     </Canvas>

@@ -4,6 +4,7 @@ import { useInventory } from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
 import Header from '@components/Header'
 import Image from 'next/image'
+import cn from 'classnames'
 
 type Props = {
   sculptures: ISculpture[]
@@ -11,14 +12,22 @@ type Props = {
 
 const Inventory = ({ sculptures }: Props) => {
   const { inventory, toggleInventory } = useInventory()
-  const { openModal } = useModal()
+  const { openModal, isOpen } = useModal()
 
   const collectedSculptures = sculptures.filter((sc) =>
     inventory.includes(sc.id)
   )
 
   return (
-    <div className='top-0 left-0 h-screen bg-white/80 fixed w-full z-10'>
+    <div
+      className={cn(
+        'top-0 left-0 h-screen fixed w-full z-10',
+        {
+          'opacity-0': isOpen,
+          'opacity-100 bg-white/60': !isOpen,
+        }
+      )}
+    >
       <div className='h-[100px] w-full'>
         <Header toggle={() => toggleInventory(false)}>
           <h1 className='text-xl flex place-items-center'>{`Collected sculptures (${collectedSculptures.length}/${sculptures.length})`}</h1>

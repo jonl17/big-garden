@@ -21,10 +21,17 @@ const Modal = () => {
         {
           'opacity-100 pointer-events-auto': isOpen,
           'opacity-0 pointer-events-none': !isOpen,
+          'bg-black': sculpture?.video,
+          'bg-white/60': !sculpture?.video,
         }
       )}
     >
-      <Header toggle={() => closeModal()}>
+      <Header
+        toggle={() => closeModal()}
+        className={cn({
+          'text-white fill-white': sculpture?.video,
+        })}
+      >
         {sculpture && (
           <div className='relative h-16 w-16'>
             <Image
@@ -38,21 +45,27 @@ const Modal = () => {
       </Header>
       <div className='h-full w-full absolute top-0'>
         {/* render 3d model */}
-        <ThreeDeeEngine
-          modelPath={
-            sculpture ? sculpture.threeDeeModel : undefined
-          }
-        />
+        {sculpture && sculpture.threeDeeModel && (
+          <ThreeDeeEngine
+            modelPath={
+              sculpture
+                ? sculpture.threeDeeModel
+                : undefined
+            }
+          />
+        )}
 
         {sculpture && sculpture.video && (
-          <video
-            className='w-full lg:h-full'
-            autoPlay
-            muted
-            loop
-          >
-            <source src={sculpture.video.url} />
-          </video>
+          <div className='mt-24'>
+            <video
+              className='w-full lg:h-full'
+              autoPlay
+              muted
+              loop
+            >
+              <source src={sculpture.video.url} />
+            </video>
+          </div>
         )}
       </div>
     </div>

@@ -85,8 +85,8 @@ const Home: NextPage<Props> = (props) => {
 }
 
 // preload models
-useLoader.preload(GLTFLoader, '/models/kassi.glb')
-useLoader.preload(GLTFLoader, '/models/tunna.glb')
+// useLoader.preload(GLTFLoader, '/models/kassi.glb')
+// useLoader.preload(GLTFLoader, '/models/tunna.glb')
 
 const query = groq`
 *[_type == "sculpture"] {

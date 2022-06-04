@@ -6,6 +6,7 @@ import Modal from '@components/Modal'
 import useWatchPosition from '@hooks/useWatchPosition'
 import React from 'react'
 import { useInventory } from 'src/store/inventory'
+import { useModal } from 'src/store/modal'
 import { useSculptures } from 'src/store/sculptures'
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 const Game = ({ mapboxEndpoint }: Props) => {
   const { inventoryOpen } = useInventory()
   const { sculptures } = useSculptures()
+  const { isOpen } = useModal()
 
   useWatchPosition(sculptures)
 
@@ -29,7 +31,7 @@ const Game = ({ mapboxEndpoint }: Props) => {
         <Inventory sculptures={sculptures} />
       )}
       <CollectButton sculptures={sculptures} />
-      <Modal />
+      {isOpen && <Modal />}
     </>
   )
 }

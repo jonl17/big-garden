@@ -72,18 +72,17 @@ const Home: NextPage<Props> = ({
     else setStarted(false)
   }, [])
 
-  if (!started) {
-    return (
-      <div
-        className={cn('relative', {
-          'opacity-0': started,
-          'opacity-100': !started,
-        })}
-      >
-        <StartingScreen startGame={startGame} />
-      </div>
-    )
-  }
+  // if (!started) {
+  //   return (
+  //     <div
+  //       className={cn('relative opacity-0', {
+  //         'opacity-100': !started,
+  //       })}
+  //     >
+  //       <StartingScreen startGame={startGame} />
+  //     </div>
+  //   )
+  // }
 
   return (
     <>
@@ -91,7 +90,11 @@ const Home: NextPage<Props> = ({
         <title>Sculpture Hunt</title>
       </Head>
       <div className='relative'>
-        <Map
+        <h1 className='text-5xl px-4 pt-12 text-center'>
+          Welcome to Sculpture Hunt. The hunt begins on the
+          9th of June.
+        </h1>
+        {/* <Map
           sculptures={sculptures}
           mapboxEndpoint={mapboxEndpoint}
         />
@@ -118,7 +121,9 @@ const Home: NextPage<Props> = ({
           </div>
         </button>
 
-        <Modal />
+        <Modal /> */}
+
+        {/* <StartingScreen startGame={startGame} /> */}
       </div>
     </>
   )

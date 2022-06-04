@@ -4,9 +4,9 @@ import { LocationProvider } from '@context/locationContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <LocationProvider>
-      <Component {...pageProps} />
-    </LocationProvider>
+    // <LocationProvider>
+    <Component {...pageProps} />
+    // </LocationProvider>
   )
 }
 

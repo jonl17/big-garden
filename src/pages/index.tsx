@@ -31,6 +31,7 @@ import {
 } from 'src/store/user'
 import cn from 'classnames'
 import { useTraceUpdate } from '@hooks/useTraceUpdate'
+import Bag from '@components/Bag'
 
 type Props = {
   sculpturesRaw: any
@@ -94,18 +95,18 @@ const Home: NextPage<Props> = (props) => {
       </Head>
       <div className='relative'>
         {user && (
-          <Map
-            sculptures={sculptures}
-            mapboxEndpoint={mapboxEndpoint}
-          />
+          <>
+            <Map
+              sculptures={sculptures}
+              mapboxEndpoint={mapboxEndpoint}
+            />
+            <Bag />
+          </>
         )}
         {user === null && (
           <StartingScreen startGame={startGame} />
         )}
-        {/* <Map
-          sculptures={sculptures}
-          mapboxEndpoint={mapboxEndpoint}
-        />
+        {/* 
 
         {inventoryOpen && (
           <Inventory sculptures={sculptures} />

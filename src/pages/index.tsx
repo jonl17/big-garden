@@ -60,15 +60,6 @@ const Home: NextPage<Props> = (props) => {
     }
   }, [])
 
-  console.log(
-    'Sculptures: ',
-    sculptures,
-    'inventory: ',
-    inventory,
-    'game started: ',
-    user
-  )
-
   return (
     <>
       <Head>

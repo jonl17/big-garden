@@ -11,6 +11,7 @@ import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from 'src/types'
 import { sculptureGardenCenter } from 'src/utils'
 import Loading from '@components/Loading'
+import { usePosition } from 'src/store/position'
 
 type Props = {
   sculptures: ISculpture[]
@@ -26,7 +27,7 @@ const LeafletMap = ({
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  const { position } = useGetCurrentPosition()
+  const { coordinates: position } = usePosition()
 
   if (!position) return <Loading text='Loading map...' />
 

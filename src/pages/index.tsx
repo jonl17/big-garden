@@ -1,37 +1,24 @@
 import type { NextPage, GetStaticProps } from 'next'
-import Map from '@components/Map'
-import ControlPanel from '@components/ControlPanel'
 import { ISculpture, IUser } from 'src/types'
 import { getClient } from '@lib/sanity'
 import { groq } from 'next-sanity'
-import Modal from '@components/Modal'
-import useWatchPosition from '@hooks/useWatchPosition'
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-import Inventory from '@components/Inventory'
+import { useCallback, useEffect, useState } from 'react'
 import {
   loadFromLocalStorage,
   useInventory,
 } from 'src/store/inventory'
-import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
-import Image from 'next/image'
 import StartingScreen from '@components/StartingScreen'
 import {
   getUserFromLocalStorage,
   saveUserToLocalStorage,
 } from 'src/store/user'
-import cn from 'classnames'
 import { useTraceUpdate } from '@hooks/useTraceUpdate'
-import Bag from '@components/Bag'
+import Game from '@components/Game'
 
 type Props = {
   sculpturesRaw: any
@@ -46,13 +33,7 @@ const Home: NextPage<Props> = (props) => {
     sculpturesRaw.map(resolveSculpture)
   const { updateSculptures, sculptures } = useSculptures()
 
-  // useWatchPosition(sculptures)
-  const {
-    inventoryOpen,
-    toggleInventory,
-    inventory,
-    initInventory,
-  } = useInventory()
+  const { inventory, initInventory } = useInventory()
 
   const [user, setUser] = useState<IUser | null>()
 
@@ -94,51 +75,18 @@ const Home: NextPage<Props> = (props) => {
         <title>Sculpture Hunt</title>
       </Head>
       <div className='relative'>
-        {user && (
-          <>
-            <Map
-              sculptures={sculptures}
-              mapboxEndpoint={mapboxEndpoint}
-            />
-            <Bag />
-          </>
-        )}
+        {user && <Game mapboxEndpoint={mapboxEndpoint} />}
         {user === null && (
           <StartingScreen startGame={startGame} />
         )}
-        {/* 
-
-        {inventoryOpen && (
-          <Inventory sculptures={sculptures} />
-        )}
-
-        <CollectButton sculptures={sculptures} />
-
-        <button
-          className='absolute left-0 top-0 h-28 w-28'
-          onClick={() => toggleInventory(true)}
-        >
-          <div className='relative h-full w-full'>
-            <Image
-              layout='fill'
-              alt='Bag icon'
-              src='/bag-yellow.png'
-            />
-            <p className='absolute top-16 left-12 text-xl'>
-              {inventory.length}
-            </p>
-          </div>
-        </button>
-
-        <Modal /> */}
       </div>
     </>
   )
 }
 
 // preload models
-// useLoader.preload(GLTFLoader, '/models/kassi.glb')
-// useLoader.preload(GLTFLoader, '/models/tunna.glb')
+useLoader.preload(GLTFLoader, '/models/kassi.glb')
+useLoader.preload(GLTFLoader, '/models/tunna.glb')
 
 const query = groq`
 *[_type == "sculpture"] {

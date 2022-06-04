@@ -42,11 +42,6 @@ const Modal = () => {
           modelPath={
             sculpture ? sculpture.threeDeeModel : undefined
           }
-          panoramaPath={
-            sculpture && sculpture.panorama
-              ? sculpture.panorama.url
-              : undefined
-          }
         />
 
         {sculpture && sculpture.video && (

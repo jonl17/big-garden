@@ -7,6 +7,7 @@ import {
   useInventory,
 } from 'src/store/inventory'
 import { useModal } from 'src/store/modal'
+import { usePosition } from 'src/store/position'
 import { TrackType, useTracker } from 'src/store/tracker'
 import { checkProximity } from 'src/utils'
 
@@ -19,7 +20,7 @@ const CollectButton = ({ sculptures }: Props) => {
     useInventory()
   const { tracked, updateTracking } = useTracker()
 
-  const { position } = useGetCurrentPosition()
+  const { coordinates: position } = usePosition()
   const { openModal } = useModal()
 
   const [collectable, setCollectable] =

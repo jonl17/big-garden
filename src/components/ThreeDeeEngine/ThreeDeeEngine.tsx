@@ -48,26 +48,22 @@ interface IThreeDeeEngineProps {
 
 const ThreeDeeEngine = ({
   modelPath,
-  panoramaPath,
 }: IThreeDeeEngineProps) => {
   const isBrowser = typeof window !== 'undefined'
 
   if (!isBrowser) return null
 
-  console.log('loading canvas?')
-
   return (
     <Canvas
       className={cn('three-js-canvas', {
-        // block: modelPath,
-        // hidden: !modelPath,
+        block: modelPath,
+        hidden: !modelPath,
       })}
       frameloop='demand'
       camera={{ position: [300, 300, -20], fov: 25 }}
     >
       <Suspense fallback={null}>
         <ambientLight intensity={0.75} />
-        {panoramaPath && <Panorama path={panoramaPath} />}
         {modelPath && <Model model={{ path: modelPath }} />}
 
         <OrbitControls

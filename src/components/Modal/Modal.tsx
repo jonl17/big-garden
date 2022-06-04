@@ -22,7 +22,7 @@ const Modal = () => {
           'opacity-100 pointer-events-auto': isOpen,
           'opacity-0 pointer-events-none': !isOpen,
           'bg-black': sculpture?.video,
-          'bg-white/60': !sculpture?.video,
+          'bg-white/50': !sculpture?.video,
         }
       )}
     >

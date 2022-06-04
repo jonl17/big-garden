@@ -24,7 +24,7 @@ const Inventory = ({ sculptures }: Props) => {
         'top-0 left-0 h-screen fixed w-full z-10',
         {
           'opacity-0': isOpen,
-          'opacity-100 bg-white/60': !isOpen,
+          'opacity-100 bg-white/50': !isOpen,
         }
       )}
     >

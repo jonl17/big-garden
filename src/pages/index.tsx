@@ -60,6 +60,8 @@ const Home: NextPage<Props> = (props) => {
     }
   }, [])
 
+  console.log('giddy up!')
+
   return (
     <>
       <Head>

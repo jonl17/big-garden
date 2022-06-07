@@ -59,7 +59,7 @@ const ThreeDeeEngine = ({
       camera={{ position: [5, 5, 0], fov: 25 }}
     >
       <Suspense fallback={<Loading />}>
-        <ambientLight intensity={0.75} />
+        <ambientLight intensity={1} />
         {modelPath && <Model model={{ path: modelPath }} />}
 
         <OrbitControls

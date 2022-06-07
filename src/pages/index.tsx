@@ -2,15 +2,13 @@ import type { NextPage, GetStaticProps } from 'next'
 import { ISculpture, IUser } from 'src/types'
 import { getClient } from '@lib/sanity'
 import { groq } from 'next-sanity'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   loadFromLocalStorage,
   useInventory,
 } from 'src/store/inventory'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
-import { useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
 import StartingScreen from '@components/StartingScreen'
 import {
@@ -29,17 +27,15 @@ const Home: NextPage<Props> = (props) => {
   useTraceUpdate(props)
 
   const { sculpturesRaw, mapboxEndpoint } = props
-  const resolvedSculptures: ISculpture[] =
-    sculpturesRaw.map(resolveSculpture)
-  const { updateSculptures, sculptures } = useSculptures()
+  const resolvedSculptures = useRef<ISculpture[] | null>(
+    null
+  )
 
-  const { inventory, initInventory } = useInventory()
+  const { updateSculptures } = useSculptures()
+
+  const { initInventory } = useInventory()
 
   const [user, setUser] = useState<IUser | null>()
-
-  const sculptureUpdateCallback = useCallback(() => {
-    updateSculptures(resolvedSculptures)
-  }, [resolvedSculptures, updateSculptures])
 
   const startGame = (username: string) => {
     const validUsername =
@@ -49,9 +45,19 @@ const Home: NextPage<Props> = (props) => {
   }
 
   useEffect(() => {
-    sculptureUpdateCallback()
+    resolvedSculptures.current = sculpturesRaw.map(
+      resolveSculpture
+    )
+    if (resolvedSculptures.current)
+      updateSculptures(resolvedSculptures.current)
+  }, [updateSculptures, sculpturesRaw])
+
+  useEffect(() => {
     const storedInventory = loadFromLocalStorage()
     initInventory(storedInventory)
+  }, [initInventory])
+
+  useEffect(() => {
     const username = getUserFromLocalStorage()
     if (username) {
       setUser({ username })
@@ -59,8 +65,6 @@ const Home: NextPage<Props> = (props) => {
       setUser(null)
     }
   }, [])
-
-  console.log('giddy up!')
 
   return (
     <>

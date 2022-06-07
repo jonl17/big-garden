@@ -56,9 +56,9 @@ const Modal = () => {
         )}
 
         {sculpture && sculpture.video && (
-          <div className='mt-24'>
+          <div className='mt-24 md:mt-0'>
             <video
-              className='w-full lg:h-full'
+              className='w-full lg:h-full absolute top-0 left-0'
               autoPlay
               muted
               loop

@@ -19,8 +19,8 @@ const Loading = () => {
   const prog = useProgress()
 
   return (
-    <Html>
-      <p className='text-5xl'>{`${prog.progress}%`}</p>
+    <Html className='text-center'>
+      <p className='text-5xl text-center'>{`${prog.progress}%`}</p>
     </Html>
   )
 }
@@ -56,7 +56,7 @@ const ThreeDeeEngine = ({
         hidden: !modelPath,
       })}
       frameloop='demand'
-      camera={{ position: [0, 0, -5], fov: 25 }}
+      camera={{ position: [5, 5, 0], fov: 25 }}
     >
       <Suspense fallback={<Loading />}>
         <ambientLight intensity={0.75} />

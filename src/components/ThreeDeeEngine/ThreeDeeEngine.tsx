@@ -51,12 +51,12 @@ const ThreeDeeEngine = ({
 
   return (
     <Canvas
-      className={cn('three-js-canvas', {
+      className={cn('three-js-canvas mb-24', {
         block: modelPath,
         hidden: !modelPath,
       })}
       frameloop='demand'
-      camera={{ position: [5, 5, 0], fov: 25 }}
+      camera={{ position: [5, 0, 0], fov: 25 }}
     >
       <Suspense fallback={<Loading />}>
         <ambientLight intensity={1} />

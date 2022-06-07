@@ -18,12 +18,12 @@ const Modal = () => {
   return (
     <div
       className={cn(
-        'fixed top-0 left-0 w-full h-full lg:p-24 bg-white z-20',
+        'fixed top-0 left-0 w-full h-full lg:p-24 z-20',
         {
           'opacity-100 pointer-events-auto': isOpen,
           'opacity-0 pointer-events-none': !isOpen,
           'bg-black': sculpture?.video,
-          'bg-white/50': !sculpture?.video,
+          'bg-white/80': !sculpture?.video,
         }
       )}
     >
@@ -44,7 +44,7 @@ const Modal = () => {
           </div>
         )}
       </Header>
-      <div className='h-full w-full absolute top-0'>
+      <div className='h-full w-full absolute top-0 left-0 grid place-items-center'>
         {/* render 3d model */}
         {sculpture && sculpture.threeDeeModel && (
           <ThreeDeeEngine

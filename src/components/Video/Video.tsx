@@ -38,7 +38,7 @@ const Video = ({ video }: Props) => {
   }
 
   return (
-    <div className='grid place-content-center h-full'>
+    <div className='grid place-content-center h-full pb-24'>
       <button onClick={clickHandler}>
         <video
           className='w-full lg:h-full'
@@ -50,7 +50,7 @@ const Video = ({ video }: Props) => {
           <source src={video.url} />
         </video>
       </button>
-      <div className='h-full'>
+      <div className='h-full mt-10'>
         <button
           onClick={enterFullScreen}
           className='border-white border-2 px-3 py-2 rounded-lg float-right mr-8'

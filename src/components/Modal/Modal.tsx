@@ -1,10 +1,11 @@
 import Header from '@components/Header'
 import ThreeDeeEngine from '@components/ThreeDeeEngine'
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { useModal } from 'src/store/modal'
 import { useSculptures } from 'src/store/sculptures'
 import cn from 'classnames'
 import Image from 'next/image'
+import Video from '@components/Video'
 
 const Modal = () => {
   const { closeModal, sculptureId, isOpen } = useModal()
@@ -13,17 +14,6 @@ const Modal = () => {
   const sculpture = sculptures.find(
     (sc) => sc.id === sculptureId
   )
-
-  const videoRef = useRef<HTMLVideoElement | null>(null)
-
-  useEffect(() => {
-    if (
-      videoRef.current &&
-      videoRef.current.requestFullscreen
-    ) {
-      videoRef.current.requestFullscreen()
-    }
-  }, [])
 
   return (
     <div
@@ -67,17 +57,7 @@ const Modal = () => {
         )}
 
         {sculpture && sculpture.video && (
-          <div className='mt-24 md:mt-0'>
-            <video
-              className='w-full lg:h-full absolute top-24 left-0'
-              autoPlay
-              muted
-              loop
-              ref={videoRef}
-            >
-              <source src={sculpture.video.url} />
-            </video>
-          </div>
+          <Video video={sculpture.video} />
         )}
       </div>
     </div>

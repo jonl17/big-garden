@@ -46,6 +46,7 @@ const Video = ({ video }: Props) => {
           muted
           loop
           ref={videoRef}
+          playsInline
         >
           <source src={video.url} />
         </video>

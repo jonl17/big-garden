@@ -61,7 +61,6 @@ const Video = ({ video }: Props) => {
           loop
           ref={videoRef}
           playsInline
-          controls
         >
           <source src={video.url} />
         </video>

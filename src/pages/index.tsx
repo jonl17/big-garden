@@ -71,7 +71,7 @@ const Home: NextPage<Props> = (props) => {
       <Head>
         <title>Sculpture Hunt</title>
       </Head>
-      <div className='relative'>
+      <div className='relative overflow-hidden'>
         {user && <Game mapboxEndpoint={mapboxEndpoint} />}
         {user === null && (
           <StartingScreen startGame={startGame} />

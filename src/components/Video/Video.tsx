@@ -55,11 +55,12 @@ const Video = ({ video }: Props) => {
           loop
           ref={videoRef}
           playsInline
+          controls
         >
           <source src={video.url} />
         </video>
       </button>
-      <div className='h-full mt-10'>
+      {/* <div className='h-full mt-10'>
         <button
           onClick={enterFullScreen}
           className='border-white border-2 px-3 py-2 rounded-lg float-right mr-8'
@@ -68,7 +69,7 @@ const Video = ({ video }: Props) => {
             enter fullscreen mode
           </h3>
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }

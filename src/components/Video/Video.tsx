@@ -24,8 +24,7 @@ const Video = ({ video }: Props) => {
       } else if (current.webkitRequestFullscreen) {
         /* Safari */
         current.webkitRequestFullscreen()
-      }
-      if (current.webkitEnterFullScreen) {
+      } else if (current.webkitEnterFullScreen) {
         // Toggle fullscreen in Safari for iPad
         current.webkitEnterFullScreen()
       }

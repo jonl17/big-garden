@@ -9,7 +9,10 @@ type Props = {
 const Video = ({ video }: Props) => {
   const [playing, setPlaying] = useState(true)
   const videoRef = useRef<
-    | (HTMLVideoElement & { webkitRequestFullscreen?: any })
+    | (HTMLVideoElement & {
+        webkitRequestFullscreen?: any
+        webkitEnterFullScreen?: any
+      })
     | null
   >(null)
 
@@ -21,6 +24,10 @@ const Video = ({ video }: Props) => {
       } else if (current.webkitRequestFullscreen) {
         /* Safari */
         current.webkitRequestFullscreen()
+      }
+      if (current.webkitEnterFullScreen) {
+        // Toggle fullscreen in Safari for iPad
+        current.webkitEnterFullScreen()
       }
     }
   }
@@ -60,7 +67,7 @@ const Video = ({ video }: Props) => {
           <source src={video.url} />
         </video>
       </button>
-      {/* <div className='h-full mt-10'>
+      <div className='h-full mt-10'>
         <button
           onClick={enterFullScreen}
           className='border-white border-2 px-3 py-2 rounded-lg float-right mr-8'
@@ -69,7 +76,7 @@ const Video = ({ video }: Props) => {
             enter fullscreen mode
           </h3>
         </button>
-      </div> */}
+      </div>
     </div>
   )
 }

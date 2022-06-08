@@ -21,4 +21,21 @@
   .lucky-guy-font {
     font-family: 'Luckiest Guy', cursive;
   }
+
+  .rich-text p {
+    @apply mb-3;
+  }
+
+  .rich-text h1 {
+    @apply font-bold text-4xl mb-5;
+  }
+
+  .rich-text ol {
+    @apply pl-5;
+    @apply mb-10;
+  }
+
+  .rich-text li {
+    @apply list-disc;
+  }
 }

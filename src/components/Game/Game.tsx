@@ -19,7 +19,7 @@ type Props = {
 const Game = ({ mapboxEndpoint }: Props) => {
   const { inventoryOpen } = useInventory()
   const { sculptures } = useSculptures()
-  const { isOpen } = useModal()
+  const { isOpen: modalOpen } = useModal()
 
   useWatchPosition(sculptures)
 
@@ -35,7 +35,7 @@ const Game = ({ mapboxEndpoint }: Props) => {
         <Inventory sculptures={sculptures} />
       )}
       <CollectButton sculptures={sculptures} />
-      {isOpen && <Modal />}
+      {modalOpen && <Modal />}
     </>
   )
 }

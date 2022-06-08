@@ -13,6 +13,7 @@ import { sculptureGardenCenter } from 'src/utils'
 import Loading from '@components/Loading'
 import { usePosition } from 'src/store/position'
 import { useRefMap } from 'src/store/map'
+import { useGame } from 'src/store/game'
 
 type Props = {
   sculptures: ISculpture[]
@@ -31,13 +32,22 @@ const LeafletMap = ({
   const { coordinates: position } = usePosition()
   const { setMap } = useRefMap()
 
+  const { started } = useGame()
+
   if (!position) return <Loading text='Loading map...' />
 
   return (
     <MapContainer
       className='h-screen w-full z-0'
       zoom={16}
-      center={sculptureGardenCenter}
+      center={
+        started
+          ? {
+              lat: position.latitude,
+              lng: position.longitude,
+            }
+          : sculptureGardenCenter
+      }
       zoomControl={false}
       whenCreated={setMap}
     >

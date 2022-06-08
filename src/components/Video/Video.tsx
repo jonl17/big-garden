@@ -14,6 +14,9 @@ const Video = ({ video }: Props) => {
     const { current } = videoRef
     if (current && current.requestFullscreen) {
       current.requestFullscreen()
+    } else if (current.webkitRequestFullscreen) {
+      /* Safari */
+      current.webkitRequestFullscreen()
     }
   }
 

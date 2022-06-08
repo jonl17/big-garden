@@ -1,85 +1,70 @@
 import type { NextPage, GetStaticProps } from 'next'
-import Map from '@components/Map'
-import ControlPanel from '@components/ControlPanel'
-import { ISculpture } from 'src/types'
+import { ISculpture, IUser } from 'src/types'
 import { getClient } from '@lib/sanity'
 import { groq } from 'next-sanity'
-import Modal from '@components/Modal'
-import useWatchPosition from '@hooks/useWatchPosition'
-import { useEffect, useState } from 'react'
-import Inventory from '@components/Inventory'
+import { useEffect, useRef, useState } from 'react'
 import {
   loadFromLocalStorage,
   useInventory,
 } from 'src/store/inventory'
-import CollectButton from '@components/CollectButton'
 import { useSculptures } from 'src/store/sculptures'
 import Head from 'next/head'
-import { useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { resolveSculpture } from 'src/utils'
-import Image from 'next/image'
 import StartingScreen from '@components/StartingScreen'
 import {
   getUserFromLocalStorage,
   saveUserToLocalStorage,
 } from 'src/store/user'
-import cn from 'classnames'
+import { useTraceUpdate } from '@hooks/useTraceUpdate'
+import Game from '@components/Game'
 
 type Props = {
   sculpturesRaw: any
   mapboxEndpoint: string
 }
 
-const Home: NextPage<Props> = ({
-  sculpturesRaw,
-  mapboxEndpoint,
-}) => {
-  const sculptures: ISculpture[] = sculpturesRaw.map(
-    resolveSculpture
+const Home: NextPage<Props> = (props) => {
+  useTraceUpdate(props)
+
+  const { sculpturesRaw, mapboxEndpoint } = props
+  const resolvedSculptures = useRef<ISculpture[] | null>(
+    null
   )
+
   const { updateSculptures } = useSculptures()
 
-  useEffect(() => {
-    updateSculptures(sculptures)
-  }, [])
+  const { initInventory } = useInventory()
 
-  // useWatchPosition(sculptures)
-  const {
-    inventoryOpen,
-    toggleInventory,
-    inventory,
-    initInventory,
-  } = useInventory()
-
-  const [started, setStarted] = useState(false)
+  const [user, setUser] = useState<IUser | null>()
 
   const startGame = (username: string) => {
-    setStarted(true)
-    saveUserToLocalStorage(
+    const validUsername =
       username.length > 0 ? username : 'Art explorer'
-    )
+    setUser({ username: validUsername })
+    saveUserToLocalStorage(validUsername)
   }
+
+  useEffect(() => {
+    resolvedSculptures.current = sculpturesRaw.map(
+      resolveSculpture
+    )
+    if (resolvedSculptures.current)
+      updateSculptures(resolvedSculptures.current)
+  }, [updateSculptures, sculpturesRaw])
 
   useEffect(() => {
     const storedInventory = loadFromLocalStorage()
     initInventory(storedInventory)
-    const username = getUserFromLocalStorage()
-    if (username) setStarted(true)
-    else setStarted(false)
-  }, [])
+  }, [initInventory])
 
-  // if (!started) {
-  //   return (
-  //     <div
-  //       className={cn('relative opacity-0', {
-  //         'opacity-100': !started,
-  //       })}
-  //     >
-  //       <StartingScreen startGame={startGame} />
-  //     </div>
-  //   )
-  // }
+  useEffect(() => {
+    const username = getUserFromLocalStorage()
+    if (username) {
+      setUser({ username })
+    } else {
+      setUser(null)
+    }
+  }, [])
 
   return (
     <>
@@ -87,40 +72,10 @@ const Home: NextPage<Props> = ({
         <title>Sculpture Hunt</title>
       </Head>
       <div className='relative'>
-        <h1 className='text-5xl px-4 pt-12 text-center'>
-          Welcome to Sculpture Hunt. The hunt begins on the
-          9th of June.
-        </h1>
-        {/* <Map
-          sculptures={sculptures}
-          mapboxEndpoint={mapboxEndpoint}
-        />
-
-        {inventoryOpen && (
-          <Inventory sculptures={sculptures} />
+        {user && <Game mapboxEndpoint={mapboxEndpoint} />}
+        {user === null && (
+          <StartingScreen startGame={startGame} />
         )}
-
-        <CollectButton sculptures={sculptures} />
-
-        <button
-          className='absolute left-0 top-0 h-28 w-28'
-          onClick={() => toggleInventory(true)}
-        >
-          <div className='relative h-full w-full'>
-            <Image
-              layout='fill'
-              alt='Bag icon'
-              src='/bag-yellow.png'
-            />
-            <p className='absolute top-16 left-12 text-xl'>
-              {inventory.length}
-            </p>
-          </div>
-        </button>
-
-        <Modal /> */}
-
-        {/* <StartingScreen startGame={startGame} /> */}
       </div>
     </>
   )

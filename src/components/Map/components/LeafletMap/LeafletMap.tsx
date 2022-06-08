@@ -3,13 +3,16 @@ import {
   TileLayer,
   Marker,
   Tooltip,
+  useMap,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Icon } from 'leaflet'
 import UserAgent from '../UserAgent'
-import useGetCurrentPosition from '@hooks/useGetCurrentPosition'
 import { ISculpture } from 'src/types'
 import { sculptureGardenCenter } from 'src/utils'
+import Loading from '@components/Loading'
+import { usePosition } from 'src/store/position'
+import { useRefMap } from 'src/store/map'
 
 type Props = {
   sculptures: ISculpture[]
@@ -25,9 +28,10 @@ const LeafletMap = ({
   const icon = (iconUrl: string) =>
     new Icon({ iconUrl, iconSize: [32, 32] })
 
-  const { position } = useGetCurrentPosition()
+  const { coordinates: position } = usePosition()
+  const { setMap } = useRefMap()
 
-  if (!position) return <p>Loading map</p>
+  if (!position) return <Loading text='Loading map...' />
 
   return (
     <MapContainer
@@ -35,6 +39,7 @@ const LeafletMap = ({
       zoom={16}
       center={sculptureGardenCenter}
       zoomControl={false}
+      whenCreated={setMap}
     >
       <TileLayer attribution={attribution} url={endpoint} />
       {/* events */}

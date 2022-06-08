@@ -15,7 +15,7 @@ const TEST_INVENTORY = [
   'bca5c478-497f-4c2e-9987-560b621ce511',
 ]
 
-const KEY = 'Sculpture Hunt Inventory'
+const KEY = 'SCULPTURE_HUNT_USERNAME'
 
 export const saveToLocalStorage = (id: string) => {
   const currentInventory = loadFromLocalStorage()
@@ -38,7 +38,7 @@ export const loadFromLocalStorage = (): string[] => {
 export const useInventory = create<InventoryState>(
   (set, get) => ({
     inventoryOpen: false,
-    inventory: TEST_INVENTORY,
+    inventory: [],
     toggleInventory: (inventoryOpen) =>
       set(() => ({
         inventoryOpen,

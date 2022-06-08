@@ -17,9 +17,8 @@ const Close = ({ className, ...props }: Props) => {
     >
       <path
         d='M89 85.7831L47.7935 44.5766L89 3.21687L85.7831 0L44.5766 41.2065L3.21687 0L0 3.21687L41.2065 44.5766L0 85.7831L3.21687 89L44.5766 47.7935L85.7831 89L89 85.7831Z'
-        fill='fill-current'
         strokeWidth='4px'
-        className='stroke-black'
+        className='stroke-current fill-current'
       />
     </svg>
   )

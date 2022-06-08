@@ -12,11 +12,13 @@ const Video = ({ video }: Props) => {
 
   const enterFullScreen = () => {
     const { current } = videoRef
-    if (current && current.requestFullscreen) {
-      current.requestFullscreen()
-    } else if (current.webkitRequestFullscreen) {
-      /* Safari */
-      current.webkitRequestFullscreen()
+    if (current) {
+      if (current.requestFullscreen) {
+        current.requestFullscreen()
+      } else if (current.webkitRequestFullscreen) {
+        /* Safari */
+        current.webkitRequestFullscreen()
+      }
     }
   }
 

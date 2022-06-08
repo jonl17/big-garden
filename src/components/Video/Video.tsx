@@ -8,7 +8,10 @@ type Props = {
 
 const Video = ({ video }: Props) => {
   const [playing, setPlaying] = useState(true)
-  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const videoRef = useRef<
+    | (HTMLVideoElement & { webkitRequestFullscreen?: any })
+    | null
+  >(null)
 
   const enterFullScreen = () => {
     const { current } = videoRef

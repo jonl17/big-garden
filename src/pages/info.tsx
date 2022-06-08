@@ -5,7 +5,7 @@ import React from 'react'
 
 const InfoPage = () => {
   return (
-    <div className='p-10'>
+    <div className='py-10 px-4 md:p-10'>
       <div className='w-full h-8 mb-10 grid justify-end'>
         <Link passHref href='/'>
           <a className='h-6 w-6 grid relative '>
@@ -13,7 +13,7 @@ const InfoPage = () => {
           </a>
         </Link>
       </div>
-      <div className='rich-text max-w-md text-xl leading-relaxed'>
+      <div className='rich-text max-w-md md:max-w-2xl md:mx-auto text-xl leading-relaxed'>
         <h1>Some tips:</h1>
         <ol>
           <li>
@@ -41,7 +41,7 @@ const InfoPage = () => {
           </li>
         </ol>
       </div>
-      <div className='rich-text max-w-md text-xl leading-relaxed'>
+      <div className='rich-text max-w-md md:max-w-2xl md:mx-auto text-xl leading-relaxed'>
         <h1>About the project:</h1>
         <p>
           Sculpture Hunt is an internet artwork and

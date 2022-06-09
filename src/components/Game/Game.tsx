@@ -25,10 +25,10 @@ const Game = ({ mapboxEndpoint }: Props) => {
 
   return (
     <>
-      {/* <Map
+      <Map
         sculptures={sculptures}
         mapboxEndpoint={mapboxEndpoint}
-      /> */}
+      />
       <Bag />
       <TreasureMapGuide />
       {inventoryOpen && (

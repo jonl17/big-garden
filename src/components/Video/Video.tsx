@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import ReactPlayer from 'react-player'
 
 type Props = {
   video: {
@@ -51,13 +52,17 @@ const Video = ({ video }: Props) => {
 
   return (
     <div className='grid place-content-center h-full pb-24'>
-      <iframe
-        title='vimeo-player'
-        src='https://player.vimeo.com/video/718672009?h=98c660219e'
-        width='100%'
-        allowFullScreen
-        className='absolute left-0 top-0 lg:top-24 w-full h-[500px]'
-      ></iframe>
+      <div className='absolute left-0 top-24 w-full'>
+        <ReactPlayer
+          width='100%'
+          url='https://vimeo.com/718672009'
+          config={{
+            vimeo: { playerOptions: { autoplay: true } },
+          }}
+          loop
+        />
+      </div>
+
       {/* <div className='h-full mt-10'>
         <button
           onClick={enterFullScreen}

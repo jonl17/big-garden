@@ -60,7 +60,6 @@ const Video = ({ video }: Props) => {
             vimeo: {
               playerOptions: {
                 autoplay: true,
-                muted: true,
               },
             },
           }}

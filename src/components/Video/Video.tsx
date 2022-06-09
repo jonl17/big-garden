@@ -64,6 +64,7 @@ const Video = ({ video }: Props) => {
               },
             },
           }}
+          controls
           loop
         />
       </div>

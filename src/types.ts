@@ -21,9 +21,7 @@ export interface ISculpture {
   title: string
   coordinates: Coordinates
   mapIcon: ImageType
-  video?: {
-    url: string
-  }
+  video?: string
   threeDeeModel?: string
   description?: string
   proximity?: number

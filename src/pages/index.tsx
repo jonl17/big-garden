@@ -91,9 +91,7 @@ const query = groq`
     mapIcon { 
       asset->
     },
-    video {
-    asset->
-    },
+    video,
     title,
     coordinates,
     threeDeeModel,

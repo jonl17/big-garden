@@ -57,11 +57,7 @@ export const resolveSculpture = (
     url: node.mapIcon.asset.url,
     alt: 'map icon',
   },
-  video: node.video
-    ? {
-        url: node.video.asset.url,
-      }
-    : undefined,
+  video: node.video,
   threeDeeModel: node.threeDeeModel
     ? `/models/${node.threeDeeModel}`
     : undefined,

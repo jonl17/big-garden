@@ -2,9 +2,7 @@ import React, { useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
 
 type Props = {
-  video: {
-    url: string
-  }
+  video: string
 }
 
 const Video = ({ video }: Props) => {
@@ -55,7 +53,7 @@ const Video = ({ video }: Props) => {
       <div className='absolute left-0 top-24 w-full'>
         <ReactPlayer
           width='100%'
-          url='https://vimeo.com/718672009'
+          url={video}
           config={{
             vimeo: {
               playerOptions: {

@@ -25,7 +25,7 @@ const Sculpture = {
     {
       name: 'video',
       title: 'Video',
-      type: 'file',
+      type: 'string',
     },
     {
       name: 'threeDeeModel',

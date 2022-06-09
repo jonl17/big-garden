@@ -56,8 +56,8 @@ const Video = ({ video }: Props) => {
       <button onClick={clickHandler}>
         <video
           className='w-full lg:h-full'
-          autoPlay
           muted
+          controls
           loop
           ref={videoRef}
           playsInline

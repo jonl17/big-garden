@@ -15,7 +15,7 @@ const TEST_INVENTORY = [
   'bca5c478-497f-4c2e-9987-560b621ce511',
 ]
 
-const KEY = 'SCULPTURE_HUNT_USERNAME'
+const KEY = 'sculptureHuntUsernameStoredSession'
 
 export const saveToLocalStorage = (id: string) => {
   const currentInventory = loadFromLocalStorage()

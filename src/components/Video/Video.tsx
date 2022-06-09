@@ -57,7 +57,10 @@ const Video = ({ video }: Props) => {
         ref={videoRef}
         playsInline={true}
       >
-        <source type='video/mp4' src={TEST_VIDEO_URL} />
+        <source
+          type='video/mp4'
+          src='/assets/flowers.mp4'
+        />
       </video>
       <div className='h-full mt-10'>
         <button

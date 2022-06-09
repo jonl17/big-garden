@@ -54,7 +54,6 @@ const Video = ({ video }: Props) => {
       <video
         className='w-full lg:h-full'
         muted
-        loop
         ref={videoRef}
         playsInline
       >

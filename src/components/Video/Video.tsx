@@ -46,6 +46,9 @@ const Video = ({ video }: Props) => {
     }
   }
 
+  const TEST_VIDEO_URL =
+    'https://prismic-io.s3.amazonaws.com/sculpture-hunt/15c38b5a-a969-45ea-95ec-1a66f6336a28_blombifast.mp4'
+
   return (
     <div className='grid place-content-center h-full pb-24'>
       <video
@@ -55,7 +58,7 @@ const Video = ({ video }: Props) => {
         ref={videoRef}
         playsInline
       >
-        <source type='video/mp4' src={video.url} />
+        <source type='video/mp4' src={TEST_VIDEO_URL} />
       </video>
       <div className='h-full mt-10'>
         <button

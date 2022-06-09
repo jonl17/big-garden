@@ -57,7 +57,12 @@ const Video = ({ video }: Props) => {
           width='100%'
           url='https://vimeo.com/718672009'
           config={{
-            vimeo: { playerOptions: { autoplay: true } },
+            vimeo: {
+              playerOptions: {
+                autoplay: true,
+                muted: true,
+              },
+            },
           }}
           loop
         />

@@ -51,18 +51,14 @@ const Video = ({ video }: Props) => {
 
   return (
     <div className='grid place-content-center h-full pb-24'>
-      <video
-        className='w-full lg:h-full'
-        muted={true}
-        ref={videoRef}
-        playsInline={true}
-      >
-        <source
-          type='video/mp4'
-          src='/assets/flowers.mp4'
-        />
-      </video>
-      <div className='h-full mt-10'>
+      <iframe
+        title='vimeo-player'
+        src='https://player.vimeo.com/video/718672009?h=98c660219e'
+        width='100%'
+        allowFullScreen
+        className='absolute left-0 top-0 lg:top-24 w-full h-[500px]'
+      ></iframe>
+      {/* <div className='h-full mt-10'>
         <button
           onClick={enterFullScreen}
           className='border-white border-2 px-3 py-2 rounded-lg float-right mr-8'
@@ -87,7 +83,7 @@ const Video = ({ video }: Props) => {
             <h3 className='text-white text-base'>pause</h3>
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   )
 }

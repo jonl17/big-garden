@@ -53,9 +53,9 @@ const Video = ({ video }: Props) => {
     <div className='grid place-content-center h-full pb-24'>
       <video
         className='w-full lg:h-full'
-        muted
+        muted={true}
         ref={videoRef}
-        playsInline
+        playsInline={true}
       >
         <source type='video/mp4' src={TEST_VIDEO_URL} />
       </video>

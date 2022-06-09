@@ -62,7 +62,7 @@ const Video = ({ video }: Props) => {
           ref={videoRef}
           playsInline
         >
-          <source src={video.url} />
+          <source type='video/mp4' src={video.url} />
         </video>
       </button>
       <div className='h-full mt-10'>

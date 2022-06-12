@@ -1,4 +1,5 @@
 import { ISculpture } from '@types'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
 import { useGame } from 'src/store/game'
 import { useInventory } from 'src/store/inventory'
@@ -49,6 +50,8 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
     ]
   )
 
+  const router = useRouter()
+
   useEffect(() => {
     const geo = navigator.geolocation
     const options: PositionOptions = {
@@ -58,12 +61,12 @@ const useWatchPosition = (sculptures: ISculpture[]) => {
     if (geo) {
       const watchId = geo.watchPosition(
         callback,
-        geoErrorHandler,
+        () => router.push('/pending'),
         options
       )
       return () => geo.clearWatch(watchId)
     }
-  }, [callback])
+  }, [callback, router])
 }
 
 export default useWatchPosition

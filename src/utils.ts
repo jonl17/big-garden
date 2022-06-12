@@ -24,9 +24,9 @@ export const measureDistance = (
 
 export const geoErrorHandler = (err: any) => {
   if (err.code == 1) {
-    alert('Error: Access is denied!')
+    return false
   } else if (err.code == 2) {
-    alert('Error: Position is unavailable!')
+    return false
   }
 }
 
@@ -68,6 +68,7 @@ export const resolveSculpture = (
         alt: 'panorama',
       }
     : undefined,
+  modelScale: node.modelScale ?? 1,
 })
 
 export const sculptureGardenCenter = {

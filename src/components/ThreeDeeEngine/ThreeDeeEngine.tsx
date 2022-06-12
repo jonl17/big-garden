@@ -28,22 +28,30 @@ const Loading = () => {
 type ModelProps = {
   model: {
     path: string
+    scale?: number
   }
 }
 
 const Model = ({ model }: ModelProps) => {
   const gltf = useLoader(GLTFLoader, model.path)
 
-  return <primitive object={gltf.scene} />
+  return (
+    <primitive
+      scale={model.scale ?? 1}
+      object={gltf.scene}
+    />
+  )
 }
 
 interface IThreeDeeEngineProps {
   modelPath?: string
   panoramaPath?: string
+  modelScale?: number
 }
 
 const ThreeDeeEngine = ({
   modelPath,
+  modelScale,
 }: IThreeDeeEngineProps) => {
   const isBrowser = typeof window !== 'undefined'
 
@@ -60,7 +68,11 @@ const ThreeDeeEngine = ({
     >
       <Suspense fallback={<Loading />}>
         <ambientLight intensity={1} />
-        {modelPath && <Model model={{ path: modelPath }} />}
+        {modelPath && (
+          <Model
+            model={{ path: modelPath, scale: modelScale }}
+          />
+        )}
 
         <OrbitControls
           enableZoom={false}

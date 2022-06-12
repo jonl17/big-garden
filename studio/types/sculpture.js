@@ -34,6 +34,11 @@ const Sculpture = {
       description: '3D Model ID goes here',
     },
     {
+      name: 'modelScale',
+      title: 'Model Scale',
+      type: 'number',
+    },
+    {
       name: 'description',
       title: 'Description',
       type: 'text',

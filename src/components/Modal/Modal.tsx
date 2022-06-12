@@ -53,6 +53,7 @@ const Modal = () => {
                 ? sculpture.threeDeeModel
                 : undefined
             }
+            modelScale={sculpture.modelScale}
           />
         )}
 

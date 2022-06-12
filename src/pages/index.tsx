@@ -95,6 +95,7 @@ const query = groq`
     title,
     coordinates,
     threeDeeModel,
+    modelScale,
     proximity,
     panorama {
       asset->

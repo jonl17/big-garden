@@ -26,6 +26,7 @@ export interface ISculpture {
   description?: string
   proximity?: number
   panorama?: ImageType
+  modelScale?: number
 }
 
 export interface IUser {
